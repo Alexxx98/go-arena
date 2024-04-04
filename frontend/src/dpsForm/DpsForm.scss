@@ -1,0 +1,66 @@
+$primary-color: hsla(0, 0%, 7%, 0.863);
+$secondary-color: hsla(0, 1%, 37%, 0.856);
+$text-color: hsla(0, 0%, 89%, 0.911);
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+
+    form {
+        background-color: $primary-color;
+        color: $text-color;
+        text-align: center;
+        border-radius: 15px;
+        padding: 50px;
+        box-shadow: 5px 5px 5px black;
+
+        label {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        input[type='text'] {
+            margin: 30px;
+            padding: 15px;
+            border-radius: 5px;
+            width: 30vw;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        input[type='text']:focus {
+            outline: none;
+        }
+
+        input[type='submit'] {
+            font-size: 2rem;
+            margin-top: 20px;
+            padding: 25px 45px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            background-color: hsl(189, 100%, 50%);
+        }
+
+        input[type='submit']:hover {
+            background-color: hsl(189, 95%, 61%);
+        } 
+
+    }
+}
+
+.suggestions {
+    display: none;
+    min-height: 100px;
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+    background: white;
+}
+
+.suggestion {
+    text-align: center;
+    font-size: 1.25rem;
+}

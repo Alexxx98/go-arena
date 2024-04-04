@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'PokemonFont';
+  src: url('assets/Pokemon_Solid.ttf') format('ttf')
+}
+
+body {
+  font-family: 'PokemonFont', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url("assets/rayquaza.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
