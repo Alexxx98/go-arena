@@ -30,11 +30,6 @@ async function fetchData() {
         ])
       }
     }
-
-  return () => {
-    pokemonData.splice(0, pokemonNames.length)
-  }
-
   }
 
   catch(error){
@@ -44,16 +39,22 @@ async function fetchData() {
 
 function App() {
 
-  useEffect(() => {
-    fetchData();
-  }, [])
+  const [loading, setLoading] = useState(true);
 
-  console.log(pokemonData)
+  useEffect(() => {
+    fetchData().then(() => {
+      setLoading(false)
+    });
+    
+    return () => {
+      pokemonData.slice(0, pokemonData.length);
+    }
+  }, [])
 
   return (
     <>
       <Navbar />
-      <DpsForm pokemonData = {pokemonData} />
+      {!loading && <DpsForm pokemonData = {pokemonData} />}
     </>
   )
 }

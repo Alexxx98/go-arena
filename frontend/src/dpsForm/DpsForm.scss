@@ -1,14 +1,17 @@
 $primary-color: hsla(0, 0%, 7%, 0.863);
 $secondary-color: hsla(0, 1%, 37%, 0.856);
 $text-color: hsla(0, 0%, 89%, 0.911);
+$short-transition-time: 0.2s;
 
 .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 80vh;
+    transition: all 0.5s linear;
 
-    form {
+    .form {
         background-color: $primary-color;
         color: $text-color;
         text-align: center;
@@ -22,16 +25,20 @@ $text-color: hsla(0, 0%, 89%, 0.911);
         }
 
         input[type='text'] {
-            margin: 30px;
             padding: 15px;
             border-radius: 5px;
-            width: 30vw;
             text-align: center;
             font-size: 1.5rem;
+            width: 30vw;
+            transition: $short-transition-time ease;
         }
 
         input[type='text']:focus {
             outline: none;
+        }
+
+        input[type='text']:hover {
+            transform: scale(1.1);
         }
 
         input[type='submit'] {
@@ -42,25 +49,51 @@ $text-color: hsla(0, 0%, 89%, 0.911);
             border-radius: 15px;
             cursor: pointer;
             background-color: hsl(189, 100%, 50%);
+            transition: $short-transition-time ease;
         }
 
         input[type='submit']:hover {
             background-color: hsl(189, 95%, 61%);
+            transform: scale(1.1)
         } 
+
+        input[type='submit']:active {
+            transform: scale(0.9);
+        }
 
     }
 }
 
+.input-container {
+    margin: 30px;
+}
+
+@keyframes suggestions-appearing {
+    from {height: 0px;}
+    to {height: 300px;}
+}
+
 .suggestions {
+    position: absolute;
     display: none;
-    min-height: 100px;
-    max-height: 300px;
+    height: 300px;
     overflow: hidden;
     overflow-y: scroll;
     background: white;
+    border-radius: 5px;
+    animation-name: suggestions-appearing;
+    animation-duration: 0.5s;
 }
 
 .suggestion {
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: black;
+    padding: 10px;
+    width: 30vw;
+}
+
+.suggestion:hover {
+    background-color: $text-color;
 }

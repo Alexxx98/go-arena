@@ -2,9 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 80vh;
+  transition: all 0.5s linear;
 }
-.form-container form {
+.form-container .form {
   background-color: hsla(0, 0%, 7%, 0.863);
   color: hsla(0, 0%, 89%, 0.911);
   text-align: center;
@@ -12,22 +14,25 @@
   padding: 50px;
   box-shadow: 5px 5px 5px black;
 }
-.form-container form label {
+.form-container .form label {
   font-size: 4rem;
   font-weight: bold;
 }
-.form-container form input[type=text] {
-  margin: 30px;
+.form-container .form input[type=text] {
   padding: 15px;
   border-radius: 5px;
-  width: 30vw;
   text-align: center;
   font-size: 1.5rem;
+  width: 30vw;
+  transition: 0.2s ease;
 }
-.form-container form input[type=text]:focus {
+.form-container .form input[type=text]:focus {
   outline: none;
 }
-.form-container form input[type=submit] {
+.form-container .form input[type=text]:hover {
+  transform: scale(1.1);
+}
+.form-container .form input[type=submit] {
   font-size: 2rem;
   margin-top: 20px;
   padding: 25px 45px;
@@ -35,23 +40,51 @@
   border-radius: 15px;
   cursor: pointer;
   background-color: hsl(189, 100%, 50%);
+  transition: 0.2s ease;
 }
-.form-container form input[type=submit]:hover {
+.form-container .form input[type=submit]:hover {
   background-color: hsl(189, 95%, 61%);
+  transform: scale(1.1);
+}
+.form-container .form input[type=submit]:active {
+  transform: scale(0.9);
 }
 
+.input-container {
+  margin: 30px;
+}
+
+@keyframes suggestions-appearing {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 300px;
+  }
+}
 .suggestions {
+  position: absolute;
   display: none;
-  min-height: 100px;
-  max-height: 300px;
+  height: 300px;
   overflow: hidden;
   overflow-y: scroll;
   background: white;
+  border-radius: 5px;
+  animation-name: suggestions-appearing;
+  animation-duration: 0.5s;
 }
 
 .suggestion {
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: black;
+  padding: 10px;
+  width: 30vw;
+}
+
+.suggestion:hover {
+  background-color: hsla(0, 0%, 89%, 0.911);
 }
 
 /*# sourceMappingURL=DpsForm.css.map */
