@@ -60,26 +60,26 @@ $short-transition-time: 0.2s;
         input[type='submit']:active {
             transform: scale(0.9);
         }
-
     }
 }
 
 .input-container {
-    margin: 30px;
+    margin: 50px 20px;
 }
 
 @keyframes suggestions-appearing {
     from {height: 0px;}
-    to {height: 300px;}
+    to {height: auto;}
 }
 
 .suggestions {
     position: absolute;
     display: none;
-    height: 300px;
+    max-height: 300px;
     overflow: hidden;
     overflow-y: scroll;
     background: white;
+    border: 1px solid $primary-color;
     border-radius: 5px;
     animation-name: suggestions-appearing;
     animation-duration: 0.5s;
@@ -96,4 +96,34 @@ $short-transition-time: 0.2s;
 
 .suggestion:hover {
     background-color: $text-color;
+}
+
+.level-select-container {
+    color: $text-color;
+    width: 20vw;
+    margin: auto;
+    padding: 5px;
+    background-color: $secondary-color;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.level-suggestions {
+    position: absolute;
+    width: 20vw;
+    display: none;
+    max-height: 150px;
+    overflow: hidden;
+    overflow-y: scroll;
+    border: 2px solid $primary-color;
+    border-radius: 5px;
+    background-color: hsl(0, 1%, 37%);
+}
+
+.level {
+    padding: 10px;
+}
+
+.level:hover {
+    background-color: $primary-color;
 }
