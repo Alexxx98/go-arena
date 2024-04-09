@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
 import Navbar from './navbar/Navbar.jsx'
 import DpsForm from './dpsForm/DpsForm.jsx'
+import PokemonCard from './pokemonCard/PokemonCard.jsx'
 
-const apiUrl = "https://pogoapi.net"
+const PoGOAPI = "https://pogoapi.net"
 const currentPokemonMoves = "/api/v1/current_pokemon_moves.json"
+
+const GoArenaAPI = ""
+const pokemonCardInfo = {"name": "Metagross", "fast_move": "Bullet_Punch"}
 
 const pokemonData = [];
 
@@ -12,7 +16,7 @@ const validForms = ['Normal', 'Alola', 'Galarian', 'Hisuian', 'Origin', 'Altered
 async function fetchData() {
 
   try {
-    const response = await fetch(apiUrl + currentPokemonMoves)
+    const response = await fetch(PoGOAPI + currentPokemonMoves)
 
     if (!response.ok) {
       throw new Error("Could not fetch data");

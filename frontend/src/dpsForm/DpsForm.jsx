@@ -21,7 +21,7 @@ function DpsForm(props) {
     const [fastMoveSuggestionsList, setFastMoveSuggestionsList] = useState("");
     const [chargedMoveSuggestionsList, setChargedMoveSuggestionsList] = useState("")
 
-
+    // Change list of displayed moves each time suggestion list changes 
     useEffect(() => {
 
         if (fastMoveSuggestions.length > 0 && chargedMoveSuggestions.length > 0) {
@@ -40,6 +40,7 @@ function DpsForm(props) {
         
     }, [fastMoveSuggestions, chargedMoveSuggestions]);
 
+    // show element functions
     function showSuggestions(event) {
         const suggestions = event.target.nextSibling;
         suggestions.style.display = "block";
@@ -52,21 +53,21 @@ function DpsForm(props) {
 
     function hideSuggestions(event) {
         const levels = document.getElementById("level-suggestions");
-        console.log(event);
     }
 
     function handlePokemonNameChange(event) {
         setPokemonName(event.target.value);
 
         const newSuggestions = pokemonNamesList.filter(
-            name => pokemonName.length > 0 ? 
-            name.includes(pokemonName) :
+            name => pokemonName.length > 1 ? 
+            name.includes(pokemonName[0].toUpperCase() + pokemonName.slice(1, -1).toLowerCase()) :
             pokemonNamesList
         );
 
-        setNameSuggestions(newSuggestions);
+        setNameSuggestions(newSuggestions.slice(0, newSuggestions.length / 2));
     }
 
+    // On change functions
     function handleFastMovecChange(event) {
         setFastMove(event.target.value);
     }
@@ -92,6 +93,7 @@ function DpsForm(props) {
         setChargedMoveSuggestions(pokemon[0][2]);
 
         setPokemonName(pokemonName);
+        console.log(pokemonName.length);
 
         suggestions.style.display = "none";
         
@@ -124,6 +126,7 @@ function DpsForm(props) {
 
     }
     
+    // content displayed in suggestions divs
     const nameSuggestionsList = nameSuggestions.map((name, index) => (
         <div key={index} className="suggestion" onClick={changePokemonName}>
             {name}

@@ -105,7 +105,12 @@ $short-transition-time: 0.2s;
     padding: 5px;
     background-color: $secondary-color;
     border-radius: 15px;
+    transition: $short-transition-time ease;
     cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .level-suggestions {
