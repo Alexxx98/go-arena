@@ -10,9 +10,6 @@ function PokemonCard() {
     const [pokemonList, setPokemonList] = useState([])
 
     useEffect(() => {
-        const cardsContainer = document.getElementById("cards-container");
-        cardsContainer.style.display = 'block';
-
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
             const pokemonData = JSON.parse(localStorage.getItem(key));
@@ -75,7 +72,7 @@ function PokemonCard() {
                 <span onClick={deletePokemon}>&#10005;</span>
                 <img className="sprite" src={`${pokemon.data.image}`} alt={`${pokemon.data.name}`} />
                 <p onClick={hideSprite} className={
-                    pokemon.data.is_shadow ? "shadow-fog" : "unvisible"
+                    pokemon.data.is_shadow ? "shadow-fog" : ""
                     }>{`${pokemon.data.name}`}</p>
                 <img className="type-one-img" src={typesImages[`${pokemon.data.types[0].toLowerCase()}`]} alt="type_one" />
                 {pokemon.data.types.length > 1 && <img className="type-two-img" src={typesImages[`${pokemon.data.types[1].toLowerCase()}`]} alt="type_two" />}

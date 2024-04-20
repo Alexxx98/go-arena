@@ -9,15 +9,31 @@ import './DpsForm.css'
 
 function DpsForm(props) {
 
-    const pokemonData = props.pokemonData;
+    const [pokemonData, setPokemonData] = useState(props.pokemonData)
     const shadowPokemonList = props.shadowPokemonList;
 
     const apiUrl = "http://127.0.0.1:8000/api/pokemon/"
 
     // variables for input values
-    const [pokemonName, setPokemonName] = useState("");
-    const [fastMove, setFastMove] = useState("");
-    const [chargedMove, setChargedMove] = useState("");
+    const [pokemonName, setPokemonName] = useState(() => {
+        const storedPokemonName = sessionStorage.getItem("pokemon-name");
+        return storedPokemonName ? storedPokemonName : "";
+    });
+    const [fastMove, setFastMove] = useState(() => {
+        const storedFastMove = sessionStorage.getItem("fast-move");
+        return storedFastMove ? storedFastMove : "";
+    });
+    const [chargedMove, setChargedMove] = useState(() => {
+        const storedChargedMove = sessionStorage.getItem("charged-move");
+        return storedChargedMove ? storedChargedMove : "";
+    });
+
+    useEffect(() => {
+        sessionStorage.setItem("pokemon-name", pokemonName);
+        sessionStorage.setItem("fast-move", fastMove);
+        sessionStorage.setItem("charged-move", chargedMove);
+    }, [pokemonName, fastMove, chargedMove])
+
     const [cp, setCp] = useState("");
     const [attackIv, setAttackIv] = useState(15);
     const [defenseIv, setDefenseIv] = useState(15);
@@ -27,10 +43,9 @@ function DpsForm(props) {
     const pokemonNamesList = props.pokemonData.map(data => data[0])
 
     const [nameSuggestions, setNameSuggestions] = useState(pokemonNamesList);
-    const [fastMoveSuggestions, setFastMoveSuggestions] = useState([]);
-    const [chargedMoveSuggestions, setChargedMoveSuggestions] = useState([]);
+    const [fastMoveSuggestions, setFastMoveSuggestions] = useState([])
+    const [chargedMoveSuggestions, setChargedMoveSuggestions] = useState([])
     const [level, setLevel] = useState("Select Level");
-
     const [fastMoveSuggestionsList, setFastMoveSuggestionsList] = useState("");
     const [chargedMoveSuggestionsList, setChargedMoveSuggestionsList] = useState("")
 
@@ -40,7 +55,6 @@ function DpsForm(props) {
     // Booleans
     const [isShiny, setIsShiny] = useState(false);
     const [isShadow, setIsShadow] = useState(false);
-    const [canBeShadow, setCanBeShadow] = useState(true);
 
     // Make a post request
     const [lastId, setLastId] = useState("");
@@ -79,7 +93,6 @@ function DpsForm(props) {
             return response.json()
         })
         .then(data => {
-            console.log(data)
             data.fast_move = JSON.parse(`{${data.fast_move}}`);
             data.charged_move = JSON.parse(`{${data.charged_move}}`);
 
@@ -96,13 +109,13 @@ function DpsForm(props) {
             loadingScreen.style.display = 'none';
         })
 
-        setPokemonName("");
-        setFastMove("");
-        setFastMoveSuggestions([]);
-        setFastMoveSuggestionsList([]);
-        setChargedMove("");
-        setChargedMoveSuggestions([]);
-        setChargedMoveSuggestionsList([])
+        // setPokemonName("");
+        // setFastMove("");
+        // setFastMoveSuggestions([]);
+        // setFastMoveSuggestionsList([]);
+        // setChargedMove("");
+        // setChargedMoveSuggestions([]);
+        // setChargedMoveSuggestionsList([])
         setLevel("Select Level:");
         setCp("");
         setAttackIv(15);
@@ -111,23 +124,23 @@ function DpsForm(props) {
     }
 
     // Change list of displayed moves each time suggestion list changes 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (fastMoveSuggestions.length > 0 && chargedMoveSuggestions.length > 0) {
-            setFastMoveSuggestionsList(fastMoveSuggestions.map((move, index) => (
-                <div key={index} className="suggestion" onClick={changeFastMove}>
-                    {move}
-                </div>
-            )));
+    //     if (fastMoveSuggestions.length > 0 && chargedMoveSuggestions.length > 0) {
+    //         setFastMoveSuggestionsList(fastMoveSuggestions.map((move, index) => (
+    //             <div key={index} className="suggestion" onClick={changeFastMove}>
+    //                 {move}
+    //             </div>
+    //         )));
 
-            setChargedMoveSuggestionsList(chargedMoveSuggestions.map((move, index) => (
-                <div key={index} className="suggestion" onClick={changeChargedMove}>
-                    {move}
-                </div>
-            )));
-        }
+    //         setChargedMoveSuggestionsList(chargedMoveSuggestions.map((move, index) => (
+    //             <div key={index} className="suggestion" onClick={changeChargedMove}>
+    //                 {move}
+    //             </div>
+    //         )));
+    //     }
         
-    }, [fastMoveSuggestions, chargedMoveSuggestions]);
+    // }, [fastMoveSuggestions, chargedMoveSuggestions]);
 
     // Switch background of switches
     useEffect(() => {
@@ -148,9 +161,10 @@ function DpsForm(props) {
     function showSuggestions(event) {
         const suggestions = event.target.nextSibling;
 
-        if (suggestions) {
-            suggestions.style.display = "block";      
-            suggestions.style.height = "auto";
+        if (suggestions.className === "suggestions"){
+            suggestions.className = "suggestions-visible";
+        } else {
+            suggestions.className = "suggestions";
         }
     }
 
@@ -189,7 +203,8 @@ function DpsForm(props) {
             pokemonNamesList
         );
 
-        setNameSuggestions(newSuggestions.slice(0, newSuggestions.length / 2));
+        // setNameSuggestions(newSuggestions.slice(0, newSuggestions.length / 2));
+        setNameSuggestions(newSuggestions);
     }
 
     // On change functions
@@ -200,6 +215,16 @@ function DpsForm(props) {
     function handleChargedMoveChange(event) {
         setChargedMove(event.target.value);
     }
+
+    useEffect(() => {
+        const pokemon = pokemonData.filter(pokemon => (
+            pokemon[0] === pokemonName
+        ));
+        
+        setFastMoveSuggestions(pokemon[1]);
+        setChargedMoveSuggestions(pokemon[2]);
+
+    }, [])
 
     function changePokemonName(event) {
         const suggestions = document.getElementById("name-suggestions");
@@ -212,12 +237,14 @@ function DpsForm(props) {
         setFastMove("");
         setChargedMove("");
 
+        console.log(pokemon);
+
         setFastMoveSuggestions(pokemon[0][1]);
         setChargedMoveSuggestions(pokemon[0][2]);
 
         setPokemonName(pokemonName);
 
-        suggestions.style.display = "none";
+        suggestions.className = "suggestions";
 
         const isShadowContainer = document.getElementById("is-shadow-container")
         isShadowContainer.style.display = 'none';
@@ -235,7 +262,7 @@ function DpsForm(props) {
         setFastMove(event.target.innerText);
         
         const suggestions = document.getElementById("fast-move-suggestions");
-        suggestions.style.display = "none";
+        suggestions.className = "suggestions";
 
     }
 
@@ -244,7 +271,7 @@ function DpsForm(props) {
         setChargedMove(event.target.innerText);
 
         const suggestions = document.getElementById("charged-move-suggestions");
-        suggestions.style.display = "none";
+        suggestions.className = "suggestions";
 
     }
 
@@ -336,21 +363,21 @@ function DpsForm(props) {
                         </div>
 
                         <div className="input-container">
-                            <input type="text" placeholder="Pokemon Name" value={pokemonName} onChange={handlePokemonNameChange} onFocus={showSuggestions} />
+                            <input type="text" placeholder="Pokemon Name" value={pokemonName} onChange={handlePokemonNameChange} onClick={showSuggestions} />
                             <div id="name-suggestions" className="suggestions">
                                 {nameSuggestionsList}
                             </div> 
                         </div>
 
                         <div className="input-container">
-                            <input type="text" placeholder="Fast Move" value={fastMove} onChange={handleFastMovecChange} onFocus={showSuggestions} />
+                            <input type="text" placeholder="Fast Move" value={fastMove} onChange={handleFastMovecChange} onClick={showSuggestions} />
                             <div id="fast-move-suggestions" className="suggestions">
                                 {fastMoveSuggestionsList}
                             </div>
                         </div>
 
                         <div className="input-container">
-                            <input type="text" placeholder="Charged Move" value={chargedMove} onChange={handleChargedMoveChange} onFocus={showSuggestions} />
+                            <input type="text" placeholder="Charged Move" value={chargedMove} onChange={handleChargedMoveChange} onClick={showSuggestions} />
                             <div id="charged-move-suggestions" className="suggestions">
                                 {chargedMoveSuggestionsList}
                             </div>

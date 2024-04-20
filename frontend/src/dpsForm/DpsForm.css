@@ -63,7 +63,7 @@
   height: 120vh;
   width: 100vw;
   background-color: hsla(0, 0%, 0%, 0.952);
-  z-index: 1;
+  z-index: 100;
   transform: translateY(-10%);
 }
 .loading-screen div {
@@ -196,6 +196,8 @@
 }
 
 .input-container {
+  position: relative;
+  justify-content: center;
   width: 80%;
   margin: 30px 0px;
   margin: 30px auto;
@@ -204,16 +206,28 @@
 
 .suggestions {
   position: absolute;
-  max-height: 300px;
-  max-width: 800px;
-  display: none;
-  width: 80%;
+  max-height: 0px;
+  width: 95.5%;
+  margin: 0 15px;
+  overflow: hidden;
+  overflow-y: auto;
+  background: white;
+  border-radius: 5px;
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.suggestions-visible {
+  position: absolute;
+  max-height: 200px;
+  width: 95.5%;
+  margin: 0 15px;
   overflow: hidden;
   overflow-y: auto;
   background: white;
   border: 1px solid hsla(0, 0%, 7%, 0.863);
   border-radius: 5px;
-  transition: max-height 0.5s ease;
+  transition: all 0.5s ease;
   z-index: 2;
 }
 
@@ -239,6 +253,7 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.25rem;
   width: 100%;
+  transition: all 0.5s ease;
 }
 .display-level p {
   padding: 20px 5px;
@@ -246,6 +261,7 @@
 }
 
 .level-select-container {
+  position: relative;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.25rem;
   color: hsla(0, 0%, 89%, 0.911);
@@ -291,12 +307,14 @@
 
 .level-suggestions {
   position: absolute;
-  width: 95%;
+  left: 0%;
+  width: 100%;
   display: none;
   max-height: 150px;
   overflow: hidden;
   overflow-y: scroll;
   border: 2px solid hsla(0, 0%, 7%, 0.863);
+  border-top: none;
   border-radius: 5px;
   background-color: hsl(0, 1%, 37%);
 }
