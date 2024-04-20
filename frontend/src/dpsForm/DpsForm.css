@@ -1,30 +1,124 @@
+@font-face {
+  font-family: "PocketMonk";
+  src: url("../assets/PocketMonk-15ze.ttf");
+}
+@font-face {
+  font-family: "PokemonSolidFont";
+  src: url("../assets/PokemonSolidNormal-xyWR.ttf");
+}
+@keyframes rotate-the-ball {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+#title-container {
+  height: 300px;
+  position: relative;
+  min-width: 960px;
+}
+
+#shiny-snorlax {
+  position: absolute;
+  height: 125px;
+  width: 125px;
+  right: 12%;
+  top: 57%;
+}
+
+#eevee {
+  position: absolute;
+  height: 91px;
+  top: 0;
+  left: 34%;
+}
+
+#tangela {
+  position: absolute;
+  height: 100px;
+  top: 65%;
+  left: 12%;
+}
+
+#weedle {
+  position: absolute;
+  height: 80px;
+  left: 12%;
+  top: 7%;
+}
+
+#pikachu {
+  position: absolute;
+  height: 90px;
+  right: 26.3%;
+  top: 0%;
+}
+
+.loading-screen {
+  position: fixed;
+  display: none;
+  left: 0;
+  height: 120vh;
+  width: 100vw;
+  background-color: hsla(0, 0%, 0%, 0.952);
+  z-index: 1;
+  transform: translateY(-10%);
+}
+.loading-screen div {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading-screen div img {
+  height: 35%;
+  animation: rotate-the-ball 3s linear infinite;
+}
+
+.title {
+  position: absolute;
+  text-align: center;
+  font-size: 5rem;
+  text-shadow: 8px 8px hsla(219, 92%, 41%, 0.884);
+  color: hsla(0, 2%, 84%, 0.801);
+  cursor: pointer;
+  margin-top: 80px;
+  margin-bottom: 0;
+  transition: 0.3s ease;
+}
+.title:hover {
+  opacity: 0.8;
+}
+
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 80vh;
-  transition: all 0.5s linear;
+  transition: all 1s linear;
+  width: 100%;
+  border-bottom: 5px solid;
+  border-image: linear-gradient(to right, hsla(219, 92%, 41%, 0.884), hsla(0, 1%, 37%, 0.856)) 1;
 }
 .form-container .form {
-  background-color: hsla(0, 0%, 7%, 0.863);
   color: hsla(0, 0%, 89%, 0.911);
   text-align: center;
   border-radius: 15px;
   padding: 50px;
-  box-shadow: 5px 5px 5px black;
-}
-.form-container .form label {
-  font-size: 4rem;
-  font-weight: bold;
+  padding-top: 0;
+  padding-top: 0;
+  width: 100%;
 }
 .form-container .form input[type=text] {
-  padding: 15px;
+  padding: 20px;
   border-radius: 5px;
   text-align: center;
   font-size: 1.5rem;
-  width: 30vw;
-  transition: 0.2s ease;
+  width: 90%;
+  border: 2px solid hsla(219, 92%, 41%, 0.884);
+  transition: 0.3s ease;
 }
 .form-container .form input[type=text]:focus {
   outline: none;
@@ -34,77 +128,170 @@
 }
 .form-container .form input[type=submit] {
   font-size: 2rem;
-  margin-top: 20px;
+  font-weight: bold;
+  margin-top: 5px;
   padding: 25px 45px;
+  color: hsla(0, 0%, 89%, 0.911);
   border: none;
   border-radius: 15px;
   cursor: pointer;
-  background-color: hsl(189, 100%, 50%);
-  transition: 0.2s ease;
+  background: linear-gradient(to bottom right, hsla(219, 92%, 41%, 0.884) 50%, hsla(0, 0%, 99%, 0.541));
+  transition: 0.3s ease;
 }
 .form-container .form input[type=submit]:hover {
-  background-color: hsl(189, 95%, 61%);
+  background-color: hsl(219, 90%, 45%);
   transform: scale(1.1);
 }
 .form-container .form input[type=submit]:active {
   transform: scale(0.9);
 }
 
-.input-container {
-  margin: 50px 20px;
-}
-
-@keyframes suggestions-appearing {
+@keyframes show-dps-calculator {
   from {
-    height: 0px;
+    height: 0;
   }
   to {
-    height: auto;
+    height: 800px;
   }
 }
+@keyframes hide-dps-calculator {
+  from {
+    height: 800px;
+  }
+  to {
+    height: 0;
+  }
+}
+.form-content-visible {
+  animation: show-dps-calculator 1s ease-in-out forwards;
+  overflow: hidden;
+}
+
+.form-content-hidden {
+  animation: hide-dps-calculator 1s ease-in-out forwards;
+  overflow: hidden;
+}
+
+.switch-buttons {
+  font-family: "PokemonSolidFont", Arial, "sans-serif";
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid;
+  border-image: linear-gradient(to right, hsla(219, 92%, 41%, 0.884), hsla(0, 1%, 37%, 0.856)) 1;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.switch-buttons span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 5px 5px 5px black;
+  width: 50%;
+  padding: 30px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.switch-buttons span:hover {
+  transform: scaleY(1.2);
+}
+
+.input-container {
+  width: 80%;
+  margin: 30px 0px;
+  margin: 30px auto;
+  transition: 0.5s ease;
+}
+
 .suggestions {
   position: absolute;
-  display: none;
   max-height: 300px;
+  max-width: 800px;
+  display: none;
+  width: 80%;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   background: white;
   border: 1px solid hsla(0, 0%, 7%, 0.863);
   border-radius: 5px;
-  animation-name: suggestions-appearing;
-  animation-duration: 0.5s;
+  transition: max-height 0.5s ease;
+  z-index: 2;
 }
 
 .suggestion {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
   text-align: center;
   font-size: 1.5rem;
   cursor: pointer;
   color: black;
   padding: 10px;
-  width: 30vw;
+  width: 100%;
 }
 
 .suggestion:hover {
   background-color: hsla(0, 0%, 89%, 0.911);
 }
 
+.display-level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.25rem;
+  width: 100%;
+}
+.display-level p {
+  padding: 20px 5px;
+  margin: 0;
+}
+
 .level-select-container {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.25rem;
   color: hsla(0, 0%, 89%, 0.911);
-  width: 20vw;
+  font-weight: bold;
+  width: 30%;
   margin: auto;
   padding: 5px;
   background-color: hsla(0, 1%, 37%, 0.856);
   border-radius: 15px;
-  transition: 0.2s ease;
+  transition: 0.5s ease;
   cursor: pointer;
+  z-index: 1;
 }
 .level-select-container:hover {
   transform: scale(1.1);
 }
 
+@keyframes show-level-suggestions {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 150px;
+  }
+}
+@keyframes hide-level-suggestions {
+  from {
+    height: 150px;
+  }
+  to {
+    height: 0px;
+  }
+}
+.show-levels {
+  animation: show-level-suggestions 0.3s ease;
+  display: "block";
+}
+
+.hide-levels {
+  animation: hide-level-suggestions 0.3s ease;
+  display: "none";
+}
+
 .level-suggestions {
   position: absolute;
-  width: 20vw;
+  width: 95%;
   display: none;
   max-height: 150px;
   overflow: hidden;
@@ -120,6 +307,58 @@
 
 .level:hover {
   background-color: hsla(0, 0%, 7%, 0.863);
+}
+
+.arrow {
+  color: hsla(0, 0%, 89%, 0.911);
+  font-size: 2rem;
+  border: none;
+  transform: rotate(-90deg);
+  background: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.active {
+  transform: rotate(90deg);
+}
+
+.unactive {
+  transform: rotate(-90deg);
+}
+
+.iv-container {
+  margin: 10px;
+}
+.iv-container select {
+  width: 50px;
+  height: 30px;
+  margin: 5px;
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 20px;
+}
+.checkbox-container div {
+  margin: 10px;
+}
+.checkbox-container label {
+  margin: 5px;
+  text-shadow: 5px 5px black;
+}
+.checkbox-container input {
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.checkbox-container input:hover {
+  color: hsla(0, 1%, 37%, 0.856);
 }
 
 /*# sourceMappingURL=DpsForm.css.map */

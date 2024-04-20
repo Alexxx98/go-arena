@@ -1,14 +1,27 @@
 import { useState, useEffect } from 'react'
+import pokeBall from './assets/masterball.png'
+import shinySnorlax from './assets/shiny-snorlax.png'
+import eevee from './assets/eevee.png'
+import tangela from './assets/tangela.png'
+import weedle from './assets/weedle.png'
+import pikachu from './assets/pikachu3.png'
 import './DpsForm.css'
 
 function DpsForm(props) {
 
     const pokemonData = props.pokemonData;
+    const shadowPokemonList = props.shadowPokemonList;
+
+    const apiUrl = "http://127.0.0.1:8000/api/pokemon/"
 
     // variables for input values
     const [pokemonName, setPokemonName] = useState("");
     const [fastMove, setFastMove] = useState("");
     const [chargedMove, setChargedMove] = useState("");
+    const [cp, setCp] = useState("");
+    const [attackIv, setAttackIv] = useState(15);
+    const [defenseIv, setDefenseIv] = useState(15);
+    const [staminaIv, setStaminaIv] = useState(15);
 
     // Suggestions
     const pokemonNamesList = props.pokemonData.map(data => data[0])
@@ -20,6 +33,82 @@ function DpsForm(props) {
 
     const [fastMoveSuggestionsList, setFastMoveSuggestionsList] = useState("");
     const [chargedMoveSuggestionsList, setChargedMoveSuggestionsList] = useState("")
+
+    // Change form
+    const [formByLevel, setFormByLevel] = useState(true);
+
+    // Booleans
+    const [isShiny, setIsShiny] = useState(false);
+    const [isShadow, setIsShadow] = useState(false);
+    const [canBeShadow, setCanBeShadow] = useState(true);
+
+    // Make a post request
+    const [lastId, setLastId] = useState("");
+
+    function postPokemonData() {
+
+        const data = {
+            "name": pokemonName,
+            "level": level,
+            "iv": [attackIv, defenseIv, staminaIv],
+            "cp": cp,
+            "fast_move": fastMove,
+            "charged_move": chargedMove,
+            "is_shiny": isShiny,
+            "is_shadow": isShadow
+        }
+
+        if (!cp) {
+            delete data.cp;
+        }else {
+            delete data.level;
+        }
+
+        const loadingScreen = document.getElementById("loading-screen");
+        loadingScreen.style.display = 'block';
+
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Bad response")
+            }
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+            data.fast_move = JSON.parse(`{${data.fast_move}}`);
+            data.charged_move = JSON.parse(`{${data.charged_move}}`);
+
+            const id = parseInt(Math.random() * 100000)
+            localStorage.setItem(id, JSON.stringify(data));
+
+            setLastId(id);
+            loadingScreen.style.display = 'none';
+            window.location.reload()
+        })
+
+        .catch(error => {
+            console.error("Error fetching data", error);
+            loadingScreen.style.display = 'none';
+        })
+
+        setPokemonName("");
+        setFastMove("");
+        setFastMoveSuggestions([]);
+        setFastMoveSuggestionsList([]);
+        setChargedMove("");
+        setChargedMoveSuggestions([]);
+        setChargedMoveSuggestionsList([])
+        setLevel("Select Level:");
+        setCp("");
+        setAttackIv(15);
+        setDefenseIv(15);
+        setStaminaIv(15);
+    }
 
     // Change list of displayed moves each time suggestion list changes 
     useEffect(() => {
@@ -40,15 +129,51 @@ function DpsForm(props) {
         
     }, [fastMoveSuggestions, chargedMoveSuggestions]);
 
-    // show element functions
+    // Switch background of switches
+    useEffect(() => {
+        const switches = document.getElementById("switches");
+        const byLevelSwitch = switches.children[0];
+        const byCpSwitch = switches.children[1];
+
+        if (formByLevel) {
+            byLevelSwitch.style.background = "linear-gradient(to right, hsla(0, 0%, 7%, 0.863), hsla(219, 92%, 41%, 0.884)";
+            byCpSwitch.style.background = "none";
+        } else {
+            byLevelSwitch.style.background = "none";
+            byCpSwitch.style.background = "linear-gradient(to right, hsla(219, 92%, 41%, 0.884), hsla(0, 0%, 7%, 0.863)";
+        }
+
+    }, [formByLevel])
+
     function showSuggestions(event) {
         const suggestions = event.target.nextSibling;
-        suggestions.style.display = "block";
+
+        if (suggestions) {
+            suggestions.style.display = "block";      
+            suggestions.style.height = "auto";
+        }
     }
+
+    const [areLevelsVisible, setAreLevelsVisible] = useState(false);
 
     function showLevels() {
         const levels = document.getElementById("level-suggestions");
-        levels.style.display = 'block';
+        const arrow = document.getElementById("arrow");
+
+        if (!areLevelsVisible) {
+            arrow.className = "arrow active";
+            levels.className = "level-suggestions show-levels"
+            levels.style.display = 'block';
+        } else {
+            arrow.className = "arrow unactive";
+            levels.className = "level-suggestions hide-levels"
+            setTimeout(() => {
+                levels.style.display = "none";
+            }, 300)
+        }
+
+        setAreLevelsVisible(!areLevelsVisible);
+
     }
 
     function hideSuggestions(event) {
@@ -84,8 +209,6 @@ function DpsForm(props) {
             pokemon[0] === pokemonName
         ));
 
-        console.log(pokemon[0])
-
         setFastMove("");
         setChargedMove("");
 
@@ -93,9 +216,17 @@ function DpsForm(props) {
         setChargedMoveSuggestions(pokemon[0][2]);
 
         setPokemonName(pokemonName);
-        console.log(pokemonName.length);
 
         suggestions.style.display = "none";
+
+        const isShadowContainer = document.getElementById("is-shadow-container")
+        isShadowContainer.style.display = 'none';
+        shadowPokemonList.forEach(name => {
+            if (name === pokemonName || 'Groudon' === pokemonName || 'Kyogre' === pokemonName) {
+                isShadowContainer.style.display = 'block';
+                return;
+            }
+        })
         
     }
 
@@ -122,8 +253,28 @@ function DpsForm(props) {
         setLevel(event.target.innerText);
 
         const levels = document.getElementById("level-suggestions");
-        levels.style.display = "none";
+        const arrow = document.getElementById("arrow");
 
+        arrow.className = "arrow unactive"
+        levels.className = "level-suggestions hide-levels"
+        setTimeout(() => {
+            levels.style.display = "none";
+        }, 300)
+
+        setAreLevelsVisible(!areLevelsVisible)
+
+    }
+
+    function changeCp(event) {
+        setCp(event.target.value)
+    }
+
+    function handleIsShinyClick(event) {
+        setIsShiny(event.target.checked);
+    }
+
+    function handleIsShadowClick(event) {
+        setIsShadow(event.target.checked);
     }
     
     // content displayed in suggestions divs
@@ -142,41 +293,112 @@ function DpsForm(props) {
         <div key={index} className="level" onClick={changeLevel}>{level}</div>
     ))
 
+    const ivPoints = [];
+    for (let iv = 0; iv <= 15; iv++) {
+        ivPoints.push(iv);
+    }
+
+    const ivPointsList = ivPoints.map((ivValue, index) => (
+        <option key={index} value={ivValue}>{ivValue}</option>
+    ))
+
+    const [isFormVisible, setIsFormVisible] = useState(true);
+
+    function toggleFormVisibility() {
+        setIsFormVisible(!isFormVisible);
+    }
+
     return(
-        <div className="form-container" onClick={hideSuggestions}>
-            <div className="form">
-                <label>Dps Calculator</label><br /><br />
-                <div className="input-container">
-                    <input type="text" placeholder="Pokemon Name" value={pokemonName} onChange={handlePokemonNameChange} onFocus={showSuggestions} />
-                    <div id="name-suggestions" className="suggestions">
-                        {nameSuggestionsList}
-                    </div> 
+        <div className="container">
+            <div id="loading-screen" className="loading-screen">
+                <div>
+                    <img src={pokeBall} alt="Great_Ball" />
                 </div>
+            </div>
+            <div id="title-container">
+                <img id="shiny-snorlax" src={shinySnorlax} alt="Shiny_Snorlax" />
+                <img id="tangela" src={tangela} alt="Tangela" />
+                <img id="eevee" src={eevee} alt="Eevee" />
+                <img id="weedle" src={weedle} alt="Weedle" />
+                <img id="pikachu" src={pikachu} alt="Pikachu" />
+                <h1 className="title" onClick={toggleFormVisibility}>DPS & TDO Pokemon Calculator</h1>
+            </div>
+            
+            <div className="form-container" onClick={hideSuggestions}>
+                <div className="form">
+                    <br />
 
-                <div className="input-container">
-                    <input type="text" placeholder="Fast Move" value={fastMove} onChange={handleFastMovecChange} onFocus={showSuggestions} />
-                    <div id="fast-move-suggestions" className="suggestions">
-                        {fastMoveSuggestionsList}
+                    <div id="form-content" className={isFormVisible ? "form-content-visible" : "form-content-hidden"}>
+                        {/* Form changing buttons */}
+                        <div id="switches" className="switch-buttons">
+                            <span onClick={() => setFormByLevel(true)}>Calculate by level</span>
+                            <span onClick={() => setFormByLevel(false)}>Calculate by CP</span>
+                        </div>
+
+                        <div className="input-container">
+                            <input type="text" placeholder="Pokemon Name" value={pokemonName} onChange={handlePokemonNameChange} onFocus={showSuggestions} />
+                            <div id="name-suggestions" className="suggestions">
+                                {nameSuggestionsList}
+                            </div> 
+                        </div>
+
+                        <div className="input-container">
+                            <input type="text" placeholder="Fast Move" value={fastMove} onChange={handleFastMovecChange} onFocus={showSuggestions} />
+                            <div id="fast-move-suggestions" className="suggestions">
+                                {fastMoveSuggestionsList}
+                            </div>
+                        </div>
+
+                        <div className="input-container">
+                            <input type="text" placeholder="Charged Move" value={chargedMove} onChange={handleChargedMoveChange} onFocus={showSuggestions} />
+                            <div id="charged-move-suggestions" className="suggestions">
+                                {chargedMoveSuggestionsList}
+                            </div>
+                        </div>
+
+                        {formByLevel 
+                        ?   <div id="level-selector" className="level-select-container">
+                                <div className="display-container" onClick={showLevels}>
+                                    <div className="display-level">
+                                        <p>{level}</p><button id="arrow" className="arrow">&#8249;</button>
+                                    </div>
+                                </div>
+                                <div id="level-suggestions" className="level-suggestions" >
+                                    {levelsList}
+                                </div>
+                            </div>
+                        :   <div id="cp-input" className="input-container">
+                                <input type="text" placeholder="CP" value={cp} onChange={changeCp}/>
+                            </div>
+                        }<br />
+
+                        <div className="iv-container">
+                            <select value={attackIv} onChange={(event) => {setAttackIv(event.target.value)}} >
+                                {ivPointsList}
+                            </select>
+                            <select value={defenseIv} onChange={(event) => {setDefenseIv(event.target.value)}} >
+                                {ivPointsList}
+                            </select>
+                            <select value={staminaIv} onChange={(event) => {setStaminaIv(event.target.value)}} >
+                                {ivPointsList}
+                            </select>
+                        </div>
+
+                        <div className="checkbox-container">
+                            <div>
+                                <input id="is-shiny" type="checkbox" onClick={handleIsShinyClick}/>
+                                <label htmlFor="is-shiny">Shiny</label>
+                            </div>
+
+                            <div id="is-shadow-container">
+                                <input id="is-shadow" type="checkbox" onClick={handleIsShadowClick}/>
+                                <label htmlFor="is-shadow">Shadow</label>
+                            </div>                
+                        </div>
+
+                        <input type="submit" value="Calculate" onClick={postPokemonData} />
                     </div>
                 </div>
-
-                <div className="input-container">
-                    <input type="text" placeholder="Charged Move" value={chargedMove} onChange={handleChargedMoveChange} onFocus={showSuggestions} />
-                    <div id="charged-move-suggestions" className="suggestions">
-                        {chargedMoveSuggestionsList}
-                    </div>
-                </div>
-
-                <div className="level-select-container">
-                    <div onClick={showLevels}>
-                        <p>{level} &darr;</p>
-                    </div>
-                    <div id="level-suggestions" className="level-suggestions" >
-                        {levelsList}
-                    </div>
-                </div><br />
-
-                <input type="submit" value="Calculate" />
             </div>
         </div>
     )

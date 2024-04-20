@@ -1,0 +1,161 @@
+$primary-color: hsla(0, 0%, 7%, 0.863);
+$secondary-color: hsla(0, 1%, 37%, 0.856);
+$text-color: hsla(0, 0%, 89%, 0.911);
+$pokemon-height: 150px;
+
+@font-face {
+    font-family: 'PocketMonk';
+    src: url('../assets/PocketMonk-15ze.ttf')
+}
+
+@keyframes show-sprite{
+    from {height: 0px;}
+    to {height: $pokemon-height;}
+}
+
+@keyframes hide-sprite{
+    from {height: $pokemon-height;}
+    to {height: 0px;}
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+
+    button {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        margin: 20px 0;
+        padding: 20px;
+        cursor: pointer;
+        background-color: hsla(0, 100%, 45%, 0.90);
+        border: none;
+        border-radius: 5px;
+        transition: 0.3s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &:active {
+            transform: scale(0.9)
+        }
+    }
+
+}
+
+.show-sprite {
+    animation: show-sprite 0.5s ease;
+    overflow: hidden;
+}
+
+.hide-sprite {
+    animation: hide-sprite 0.5s ease;
+    overflow: hidden;
+}
+
+.card-container {
+    position: relative;
+    width: 100%;
+    cursor: default;
+    border-top-right-radius: 15px;
+    transition: all 0.5 ease;
+}
+
+.upper-part {
+    background-color: $primary-color;
+    position: relative;
+    text-align: center;
+    font-family: 'PocketMonk', 'Arial', 'sans-serif';
+    overflow: hidden;
+
+    span {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        margin: 10px;
+        color: $primary-color;
+        opacity: 0.4;
+        cursor: pointer;
+        transform: scale(1.5);
+        transition: 0.3s ease;
+        z-index: 1;
+
+        &:hover {
+            opacity: 0.8;
+            color: $text-color;
+            transform: scale(1.7);
+        }
+    }
+
+    p {
+        position: relative;
+        font-weight: bold;
+        font-size: 3rem;
+        color: $text-color;
+        text-align: center;
+        text-shadow: 5px 5px black;
+        cursor: pointer;
+        transition: 0.3s ease;
+        margin: 0;
+
+        &:hover {
+            opacity: 0.6;
+            transform: scale(1.1);
+        }
+    }
+
+    .sprite {
+        text-align: center;
+        height: $pokemon-height;
+        padding: 0;
+        margin: auto;
+        transition: 0.5s ease;
+    }
+
+    .shadow-fog {
+        background-image: url(assets/shadow-fog1.png);
+        background-size: cover;
+        background-position: center;
+        background-position-y: 18%;
+        max-width: 60%;
+        margin: auto;
+    }
+
+    .type-one-img {
+        position: absolute;
+        left: 0%;
+        bottom: 0;
+    }
+
+    .type-two-img {
+        position: absolute;
+        right: 0%;
+        bottom: 0;
+    }
+
+}
+
+.lower-part {
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: $primary-color;
+
+    p {
+        color: white;
+        font-size: 1.25rem;
+        font-weight: bold;
+        background-color: black;
+        padding: 15px;
+        border-radius: 10px;
+        color: $text-color;
+        margin: 10px;
+        text-align: center;
+    }
+}

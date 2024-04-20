@@ -6,6 +6,7 @@
   width: 100vw;
   box-shadow: 5px 5px 5px black;
   color: hsla(0, 0%, 89%, 0.911);
+  overflow: hidden;
 }
 .navbar ul {
   margin: 0;

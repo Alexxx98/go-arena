@@ -1,0 +1,27 @@
+.dps-container {
+    margin: 0;
+    max-width: 960px;
+    text-align: center;
+}
+
+#up-we-go {
+    right: 5px;
+    font-size: 3rem;
+    bottom: 5px;
+    transform: rotate(90deg);
+    border-radius: 50%;
+    color: hsla(0, 1%, 37%, 0.856);
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#up-we-go:hover {
+    transform: rotate(90deg) scale(1.2);
+    color: hsla(0, 0%, 89%, 0.911);
+}
+
+#up-we-go:active {
+    transform: rotate(90deg) scale(0.9);
+}

@@ -1,3 +1,149 @@
+@font-face {
+  font-family: "PocketMonk";
+  src: url("../assets/PocketMonk-15ze.ttf");
+}
+@keyframes show-sprite {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 150px;
+  }
+}
+@keyframes hide-sprite {
+  from {
+    height: 150px;
+  }
+  to {
+    height: 0px;
+  }
+}
+.cards-container {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.cards-container button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin: 20px 0;
+  padding: 20px;
+  cursor: pointer;
+  background-color: hsla(0, 100%, 45%, 0.9);
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s ease;
+}
+.cards-container button:hover {
+  transform: scale(1.1);
+}
+.cards-container button:active {
+  transform: scale(0.9);
+}
 
+.show-sprite {
+  animation: show-sprite 0.5s ease;
+  overflow: hidden;
+}
+
+.hide-sprite {
+  animation: hide-sprite 0.5s ease;
+  overflow: hidden;
+}
+
+.card-container {
+  position: relative;
+  width: 100%;
+  cursor: default;
+  border-top-right-radius: 15px;
+  transition: all 0.5 ease;
+}
+
+.upper-part {
+  background-color: hsla(0, 0%, 7%, 0.863);
+  position: relative;
+  text-align: center;
+  font-family: "PocketMonk", "Arial", "sans-serif";
+  overflow: hidden;
+}
+.upper-part span {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  margin: 10px;
+  color: hsla(0, 0%, 7%, 0.863);
+  opacity: 0.4;
+  cursor: pointer;
+  transform: scale(1.5);
+  transition: 0.3s ease;
+  z-index: 1;
+}
+.upper-part span:hover {
+  opacity: 0.8;
+  color: hsla(0, 0%, 89%, 0.911);
+  transform: scale(1.7);
+}
+.upper-part p {
+  position: relative;
+  font-weight: bold;
+  font-size: 3rem;
+  color: hsla(0, 0%, 89%, 0.911);
+  text-align: center;
+  text-shadow: 5px 5px black;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin: 0;
+}
+.upper-part p:hover {
+  opacity: 0.6;
+  transform: scale(1.1);
+}
+.upper-part .sprite {
+  text-align: center;
+  height: 150px;
+  padding: 0;
+  margin: auto;
+  transition: 0.5s ease;
+}
+.upper-part .shadow-fog {
+  background-image: url(assets/shadow-fog1.png);
+  background-size: cover;
+  background-position: center;
+  background-position-y: 18%;
+  max-width: 60%;
+  margin: auto;
+}
+.upper-part .type-one-img {
+  position: absolute;
+  left: 0%;
+  bottom: 0;
+}
+.upper-part .type-two-img {
+  position: absolute;
+  right: 0%;
+  bottom: 0;
+}
+
+.lower-part {
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: hsla(0, 0%, 7%, 0.863);
+}
+.lower-part p {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  background-color: black;
+  padding: 15px;
+  border-radius: 10px;
+  color: hsla(0, 0%, 89%, 0.911);
+  margin: 10px;
+  text-align: center;
+}
 
 /*# sourceMappingURL=PokemonCard.css.map */
