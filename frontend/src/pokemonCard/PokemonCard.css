@@ -23,8 +23,8 @@
   justify-content: center;
 }
 #button-container button {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
+  font-family: "PocketMonk", Helvetica, sans-serif;
+  font-size: 2.5rem;
   font-weight: bold;
   color: white;
   margin: 20px 0;
@@ -96,6 +96,14 @@
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }
+.upper-part .for-hover {
+  position: absolute;
+  height: 120%;
+  width: 120%;
+  left: 0%;
+  cursor: default;
+  z-index: 3;
+}
 .upper-part span {
   position: absolute;
   top: 0%;
@@ -115,18 +123,16 @@
 }
 .upper-part p {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-weight: bold;
   font-size: 2.5rem;
   max-height: 45px;
   color: hsla(0, 0%, 89%, 0.911);
   text-align: center;
+  width: 52%;
   text-shadow: 5px 5px black;
   transition: 0.3s ease;
-  margin: 0;
-  z-index: 2;
+  margin: auto;
+  z-index: 5;
 }
 .upper-part p:hover {
   opacity: 0.6;
@@ -175,6 +181,15 @@
   background-color: hsla(0, 0%, 7%, 0.863);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+}
+.lower-part .for-hover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0%;
+  bottom: 0%;
+  cursor: default;
+  z-index: 3;
 }
 .lower-part p {
   color: white;

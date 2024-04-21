@@ -77,15 +77,20 @@ function PokemonCard() {
                 : {backgroundColor: `${typesColors[`${pokemon.data.types[0].toLowerCase()}`]}`}
                 }>
                 <span onClick={deletePokemon}>&#10005;</span>
+                <span className="for-hover" onMouseEnter={(event) => event.target.parentElement.parentElement.previousElementSibling.style.opacity = '1'}
+                    onMouseLeave={(event) => event.target.parentElement.parentElement.previousElementSibling.style.opacity = '0'}></span>
                 <img className="sprite" src={`${pokemon.data.image}`} alt={`${pokemon.data.name}`} />
-                {pokemon.data.is_shadow && <img className="shadow-fog" src={shadowFog} alt="Shadow_Fog" />}
-                <p onMouseEnter={(event) => event.target.parentElement.parentElement.previousElementSibling.style.opacity = '1'}
-                    onMouseLeave={(event) => event.target.parentElement.parentElement.previousElementSibling.style.opacity = '0'}
-                    >{`${pokemon.data.name}`}</p>
+                {pokemon.data.is_shadow 
+                && <img className="shadow-fog" src={shadowFog} alt="Shadow_Fog" />}
+                <p onMouseEnter={(event) => event.target.parentElement.parentElement.previousElementSibling.style.opacity = '1'}>
+                    {`${pokemon.data.name}`}
+                </p>
                 <img className="type-one-img" src={typesImages[`${pokemon.data.types[0].toLowerCase()}`]} alt="type_one" />
                 {pokemon.data.types.length > 1 && <img className="type-two-img" src={typesImages[`${pokemon.data.types[1].toLowerCase()}`]} alt="type_two" />}
             </div>
             <div id="card-lower-part" className="lower-part">
+                <span className="for-hover" onMouseEnter={(event) => event.target.parentElement.parentElement.previousElementSibling.style.opacity = '1'}
+                    onMouseLeave={(event) => event.target.parentElement.parentElement.previousElementSibling.style.opacity = '0'}></span>
                 <p>{`${pokemon.data.cp}`} CP</p>
                 <p>{`${pokemon.data.level}`} LVL</p>
                 <p>{`${pokemon.data.iv[0]}/${pokemon.data.iv[1]}/${pokemon.data.iv[2]}`} Iv</p>
