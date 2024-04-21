@@ -402,9 +402,10 @@ function DpsForm(props) {
                         :   <div id="cp-input" className="input-container">
                                 <input type="text" placeholder="CP" value={cp} onChange={changeCp}/>
                             </div>
-                        }<br />
+                        }
 
                         <div className="iv-container">
+                            <p>IV:</p>
                             <select value={attackIv} onChange={(event) => {setAttackIv(event.target.value)}} >
                                 {ivPointsList}
                             </select>
