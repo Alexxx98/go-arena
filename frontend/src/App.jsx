@@ -9,11 +9,11 @@ function App() {
   const [PoGOAPI, setPoGOAPI] = useState("https://pogoapi.net");
   const [currentPokemonMoves, setCurrentPokemonMoves] = useState("/api/v1/current_pokemon_moves.json");
   const [shadowPokemonEndpoint, setShadowPokemonEndpoint] = useState("/api/v1/shadow_pokemon.json");
-  const megaPokemonEndpoint = "/api/v1/mega_pokemon.json";
+  const [megaPokemonEndpoint, setMegaPokemonEndpoint] = useState("/api/v1/mega_pokemon.json");
 
   // const pokemonData = [];
 
-  const [validForms, setValidForms] = useState(['Normal', 'Alola', 'Galarian', 'Hisuian', 'Origin', 'Altered']);
+  const [validForms, setValidForms] = useState(['Normal', 'Alola', 'Galarian', 'Hisuian', 'Origin', 'Altered', 'Standard', 'Galarian_standard']);
 
   const [loading, setLoading] = useState(true);
   const [shadowPokemonList, setShadowPokemonList] = useState([]);
@@ -40,11 +40,18 @@ function App() {
       // Assemble all moves and pokemon names from current moves data
       for (let index = 0; index < currentMovesData.length; index++) {
         const pokemon = currentMovesData[index]
+        const pokemonChargedMoves = pokemon.charged_moves.concat(pokemon.elite_charged_moves)
+        const pokemonName = ['Normal', 'Standard'].includes(pokemon.form)
+        ? pokemon.pokemon_name
+        : pokemon.form === 'Galarian_standard'
+        ? 'Galarian' + " " + pokemon.pokemon_name
+        : pokemon.form + " " + pokemon.pokemon_name
+        pokemon.pokemon_name === 'Rayquaza' && pokemonChargedMoves.push('Dragon Ascent')
         if (validForms.includes(pokemon.form)) {
           setPokemonData(prevPokemonData => ([...prevPokemonData, 
-            [pokemon.form === 'Normal' ? pokemon.pokemon_name : pokemon.form + " " + pokemon.pokemon_name,
+            [pokemonName,
             pokemon.fast_moves.concat(pokemon.elite_fast_moves),
-            pokemon.charged_moves.concat(pokemon.elite_charged_moves)]
+            pokemonChargedMoves]
           ]))
         }
       }
@@ -57,22 +64,28 @@ function App() {
         }
       }
 
+      setShadowPokemonList(prevShadowPokemonList => ([...prevShadowPokemonList, 'Darumaka']))
+      setShadowPokemonList(prevShadowPokemonList => ([...prevShadowPokemonList, 'Darmanitan']))
+
+      const pokemonMegaNamesList = [];
       megaPokemonData.forEach(pokemon => {
         for (let index = 0; index < currentMovesData.length; index++) {
           const data = currentMovesData[index];
-          if (pokemon.pokemon_id === data.pokemon_id) {
-            setPokemonData(prevPokemonData => (
-              [...prevPokemonData, [
+          const pokemonChargedMoves = data.charged_moves.concat(data.elite_charged_moves);
+          pokemon.mega_name === 'Mega Rayquaza' && pokemonChargedMoves.push('Dragon Ascent');
+          if (pokemon.pokemon_name === data.pokemon_name && !pokemonMegaNamesList.includes(pokemon.mega_name)) {
+            pokemonMegaNamesList.push(pokemon.mega_name);
+            setPokemonData(prevPokemonData => ([...prevPokemonData, [
                 pokemon.mega_name,
-                data.fast_moves.concat(pokemon.elite_fast_moves),
-                data.charged_moves.concat(pokemon.elite_charged_moves)
+                data.fast_moves.concat(data.elite_fast_moves),
+                pokemonChargedMoves
               ]]
             ))
           }
         }
       })
-
     }
+
   
     catch(error){
       console.error(error);

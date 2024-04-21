@@ -49,6 +49,9 @@ function DpsForm(props) {
     const [fastMoveSuggestionsList, setFastMoveSuggestionsList] = useState("");
     const [chargedMoveSuggestionsList, setChargedMoveSuggestionsList] = useState("")
 
+    console.log(fastMoveSuggestions);
+    console.log(chargedMoveSuggestions);
+
     // Change form
     const [formByLevel, setFormByLevel] = useState(true);
 
@@ -124,23 +127,25 @@ function DpsForm(props) {
     }
 
     // Change list of displayed moves each time suggestion list changes 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     if (fastMoveSuggestions.length > 0 && chargedMoveSuggestions.length > 0) {
-    //         setFastMoveSuggestionsList(fastMoveSuggestions.map((move, index) => (
-    //             <div key={index} className="suggestion" onClick={changeFastMove}>
-    //                 {move}
-    //             </div>
-    //         )));
+        if (fastMoveSuggestions && chargedMoveSuggestions) {
+            if (fastMoveSuggestions.length > 0 && chargedMoveSuggestions.length > 0) {
+                setFastMoveSuggestionsList(fastMoveSuggestions.map((move, index) => (
+                    <div key={index} className="suggestion" onClick={changeFastMove}>
+                        {move}
+                    </div>
+                )));
 
-    //         setChargedMoveSuggestionsList(chargedMoveSuggestions.map((move, index) => (
-    //             <div key={index} className="suggestion" onClick={changeChargedMove}>
-    //                 {move}
-    //             </div>
-    //         )));
-    //     }
+                setChargedMoveSuggestionsList(chargedMoveSuggestions.map((move, index) => (
+                    <div key={index} className="suggestion" onClick={changeChargedMove}>
+                        {move}
+                    </div>
+                )));
+            }
+        }
         
-    // }, [fastMoveSuggestions, chargedMoveSuggestions]);
+    }, [fastMoveSuggestions, chargedMoveSuggestions]);
 
     // Switch background of switches
     useEffect(() => {
@@ -199,7 +204,7 @@ function DpsForm(props) {
 
         const newSuggestions = pokemonNamesList.filter(
             name => pokemonName.length > 1 ? 
-            name.includes(pokemonName[0].toUpperCase() + pokemonName.slice(1, -1).toLowerCase()) :
+            name.toLowerCase().includes(pokemonName.toLocaleLowerCase()) :
             pokemonNamesList
         );
 
@@ -221,8 +226,8 @@ function DpsForm(props) {
             pokemon[0] === pokemonName
         ));
         
-        setFastMoveSuggestions(pokemon[1]);
-        setChargedMoveSuggestions(pokemon[2]);
+        setFastMoveSuggestions(pokemon[0][1]);
+        setChargedMoveSuggestions(pokemon[0][2]);
 
     }, [])
 
@@ -237,15 +242,16 @@ function DpsForm(props) {
         setFastMove("");
         setChargedMove("");
 
-        console.log(pokemon);
-
         setFastMoveSuggestions(pokemon[0][1]);
         setChargedMoveSuggestions(pokemon[0][2]);
 
         setPokemonName(pokemonName);
 
         suggestions.className = "suggestions";
+        
+    }
 
+    useEffect(() => {
         const isShadowContainer = document.getElementById("is-shadow-container")
         isShadowContainer.style.display = 'none';
         shadowPokemonList.forEach(name => {
@@ -254,8 +260,7 @@ function DpsForm(props) {
                 return;
             }
         })
-        
-    }
+    }, [pokemonName])
 
     function changeFastMove(event) {
         

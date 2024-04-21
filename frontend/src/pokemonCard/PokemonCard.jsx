@@ -80,6 +80,7 @@ function PokemonCard() {
             <div id="card-lower-part" className="lower-part">
                 <p>{`${pokemon.data.cp}`} CP</p>
                 <p>{`${pokemon.data.level}`} LVL</p>
+                <p>{`${pokemon.data.iv[0]}/${pokemon.data.iv[1]}/${pokemon.data.iv[2]}`} Iv</p>
                 <p>{`${pokemon.data.dps}`} DPS</p>
                 <p style={
                     {backgroundColor: typesColors[`${pokemon.data.fast_move.type.toLowerCase()}`]}
