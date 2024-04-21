@@ -226,8 +226,8 @@ function DpsForm(props) {
             pokemon[0] === pokemonName
         ));
         
-        setFastMoveSuggestions(pokemon[0][1]);
-        setChargedMoveSuggestions(pokemon[0][2]);
+        setFastMoveSuggestions(pokemon[1]);
+        setChargedMoveSuggestions(pokemon[2]);
 
     }, [])
 

@@ -18,10 +18,11 @@
     height: 0px;
   }
 }
-.cards-container {
-  overflow: hidden;
+#button-container {
+  display: flex;
+  justify-content: center;
 }
-.cards-container button {
+#button-container button {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.5rem;
   font-weight: bold;
@@ -34,11 +35,20 @@
   border-radius: 5px;
   transition: 0.3s ease;
 }
-.cards-container button:hover {
+#button-container button:hover {
   transform: scale(1.1);
 }
-.cards-container button:active {
+#button-container button:active {
   transform: scale(0.9);
+}
+
+.cards-container {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, 600px);
+  justify-content: center;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .show-sprite {
@@ -51,12 +61,30 @@
   overflow: hidden;
 }
 
+.card-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-shadow-box {
+  position: absolute;
+  width: 620px;
+  height: 415px;
+  z-index: -1;
+  opacity: 0;
+  transition: 0.5s ease;
+  filter: blur(20px);
+}
+
 .card-container {
   position: relative;
-  width: 100%;
+  width: 600px;
+  margin: 20px;
   cursor: default;
-  border-top-right-radius: 15px;
-  transition: all 0.5 ease;
+  border-radius: 15px;
+  transition: all 0.5s ease;
+  backdrop-filter: blur(10px);
 }
 
 .upper-part {
@@ -65,6 +93,8 @@
   text-align: center;
   font-family: "PocketMonk", "Arial", "sans-serif";
   overflow: hidden;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 .upper-part span {
   position: absolute;
@@ -85,52 +115,66 @@
 }
 .upper-part p {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2.5rem;
+  max-height: 45px;
   color: hsla(0, 0%, 89%, 0.911);
   text-align: center;
   text-shadow: 5px 5px black;
-  cursor: pointer;
   transition: 0.3s ease;
   margin: 0;
+  z-index: 2;
 }
 .upper-part p:hover {
   opacity: 0.6;
   transform: scale(1.1);
 }
 .upper-part .sprite {
-  text-align: center;
+  position: relative;
   height: 150px;
   padding: 0;
   margin: auto;
   transition: 0.5s ease;
+  z-index: 2;
 }
 .upper-part .shadow-fog {
-  background-image: url(assets/shadow-fog1.png);
-  background-size: cover;
-  background-position: center;
-  background-position-y: 18%;
-  max-width: 60%;
-  margin: auto;
+  position: absolute;
+  height: 150%;
+  width: 60%;
+  bottom: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.8;
+  z-index: 1;
 }
 .upper-part .type-one-img {
   position: absolute;
   left: 0%;
   bottom: 0;
+  height: 30px;
+  z-index: 1;
 }
 .upper-part .type-two-img {
   position: absolute;
   right: 0%;
   bottom: 0;
+  height: 30px;
+  z-index: 1;
 }
 
 .lower-part {
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 20px;
   background-color: hsla(0, 0%, 7%, 0.863);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 .lower-part p {
   color: white;

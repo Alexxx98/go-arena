@@ -113,7 +113,7 @@ $form-height: 720px;
     align-items: center;
     flex-direction: column;
     transition: all 1s linear;
-    width: 100%;
+    max-width: 960px;
     border-bottom: 5px solid;
     border-image: linear-gradient(to right, $decorative-color, $secondary-color) 1;
     
