@@ -1,0 +1,47 @@
+version: "3.8"
+
+networks:
+  db-net:
+  app-net:
+
+volumes:
+  db_data:
+
+services:
+  data_base:
+    image: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    env_file:
+      - postgres.env
+    networks:
+      - db-net
+
+  backend:
+    build: ./backend
+    image: go_arena_backend_img
+    ports:
+      - 8080:8080
+    networks:
+      - db-net
+      - app-net
+    depends_on:
+      - data_base
+
+  frontend:
+    build: ./frontend
+    image: go_arena_frontend_img
+    ports:
+      - 3000:3000
+    networks:
+      - app-net
+
+  gateway:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - app-net

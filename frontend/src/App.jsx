@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import Navbar from './navbar/Navbar.jsx'
 import DpsForm from './dpsForm/DpsForm.jsx'
 import PokemonCard from './pokemonCard/PokemonCard.jsx'
+import ErrorMessage from './errorMessage/ErrorMessage.jsx'
 import './App.css'
 
 function App() {
@@ -114,6 +115,7 @@ function App() {
   return (
     <>
       <div id="dps-container" className="dps-container">
+        <ErrorMessage />
         {!loading && <DpsForm pokemonData={pokemonData} shadowPokemonList={shadowPokemonList}/>}
         {!loading && <PokemonCard />}
         <button id="up-we-go" onClick={moveToTheTop}>&#8249;</button>

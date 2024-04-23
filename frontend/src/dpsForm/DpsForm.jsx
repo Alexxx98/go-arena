@@ -12,11 +12,13 @@ function DpsForm(props) {
     const [pokemonData, setPokemonData] = useState(props.pokemonData)
     const shadowPokemonList = props.shadowPokemonList;
 
-    const apiUrl = "http://127.0.0.1:8000/api/pokemon/"
+    const apiUrl = "http://127.0.0.1:8080/api/pokemon/"
 
     // variables for input values
+    const [storageLoaded, setStorageLoaded] = useState(false);
     const [pokemonName, setPokemonName] = useState(() => {
         const storedPokemonName = sessionStorage.getItem("pokemon-name");
+        setStorageLoaded(true);
         return storedPokemonName ? storedPokemonName : "";
     });
     const [fastMove, setFastMove] = useState(() => {
@@ -32,7 +34,18 @@ function DpsForm(props) {
         sessionStorage.setItem("pokemon-name", pokemonName);
         sessionStorage.setItem("fast-move", fastMove);
         sessionStorage.setItem("charged-move", chargedMove);
+        setStorageLoaded(true);
     }, [pokemonName, fastMove, chargedMove])
+
+    useEffect(() => {
+        const pokemon = pokemonData.filter(pokemon => (
+            pokemon[0] === pokemonName
+        ));
+
+        setFastMoveSuggestions(pokemon[0][1]);
+        setChargedMoveSuggestions(pokemon[0][2]);
+
+    }, [storageLoaded])
 
     const [cp, setCp] = useState("");
     const [attackIv, setAttackIv] = useState(15);
@@ -47,10 +60,7 @@ function DpsForm(props) {
     const [chargedMoveSuggestions, setChargedMoveSuggestions] = useState([])
     const [level, setLevel] = useState("Select Level");
     const [fastMoveSuggestionsList, setFastMoveSuggestionsList] = useState("");
-    const [chargedMoveSuggestionsList, setChargedMoveSuggestionsList] = useState("")
-
-    console.log(fastMoveSuggestions);
-    console.log(chargedMoveSuggestions);
+    const [chargedMoveSuggestionsList, setChargedMoveSuggestionsList] = useState("");
 
     // Change form
     const [formByLevel, setFormByLevel] = useState(true);
@@ -58,9 +68,6 @@ function DpsForm(props) {
     // Booleans
     const [isShiny, setIsShiny] = useState(false);
     const [isShadow, setIsShadow] = useState(false);
-
-    // Make a post request
-    const [lastId, setLastId] = useState("");
 
     function postPokemonData() {
 
@@ -102,7 +109,6 @@ function DpsForm(props) {
             const id = parseInt(Math.random() * 100000)
             localStorage.setItem(id, JSON.stringify(data));
 
-            setLastId(id);
             loadingScreen.style.display = 'none';
             window.location.reload()
         })
@@ -110,15 +116,12 @@ function DpsForm(props) {
         .catch(error => {
             console.error("Error fetching data", error);
             loadingScreen.style.display = 'none';
+            const errorMessage = document.getElementById("error-message-display");
+            console.log(errorMessage);
+            errorMessage.parentElement.style.zIndex = '10';
+            errorMessage.classList.remove('hidden');
         })
 
-        // setPokemonName("");
-        // setFastMove("");
-        // setFastMoveSuggestions([]);
-        // setFastMoveSuggestionsList([]);
-        // setChargedMove("");
-        // setChargedMoveSuggestions([]);
-        // setChargedMoveSuggestionsList([])
         setLevel("Select Level:");
         setCp("");
         setAttackIv(15);
@@ -220,16 +223,6 @@ function DpsForm(props) {
     function handleChargedMoveChange(event) {
         setChargedMove(event.target.value);
     }
-
-    useEffect(() => {
-        const pokemon = pokemonData.filter(pokemon => (
-            pokemon[0] === pokemonName
-        ));
-        
-        setFastMoveSuggestions(pokemon[1]);
-        setChargedMoveSuggestions(pokemon[2]);
-
-    }, [])
 
     function changePokemonName(event) {
         const suggestions = document.getElementById("name-suggestions");

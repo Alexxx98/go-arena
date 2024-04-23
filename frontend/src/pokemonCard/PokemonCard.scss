@@ -119,7 +119,7 @@ $pokemon-height: 150px;
         cursor: pointer;
         transform: scale(1.5);
         transition: 0.3s ease;
-        z-index: 1;
+        z-index: 6;
 
         &:hover {
             opacity: 0.8;

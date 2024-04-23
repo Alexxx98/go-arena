@@ -6,3 +6,6 @@ backend/__pycache__
 api/migrations
 
 *.env
+
+.devcontainer
+.github

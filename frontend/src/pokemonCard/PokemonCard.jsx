@@ -33,22 +33,6 @@ function PokemonCard() {
 
     }
 
-    function hideSprite(event) {
-        const sprite = event.target.previousElementSibling;
-        const deleteButton = sprite.previousElementSibling; 
-        
-        if (sprite.style.display === 'none') {
-            sprite.className = 'sprite show-sprite';
-            sprite.style.display = 'block';
-            deleteButton.style.display = 'block';
-        } else {
-            sprite.className = 'sprite hide-sprite';
-            setTimeout(() => {
-                sprite.style.display = 'none';
-            }, 300);
-        }
-    }
-
     function deletePokemon(event) {
         const container = event.target.parentElement.parentElement;
         const pokemonId = container.id
@@ -76,7 +60,7 @@ function PokemonCard() {
                 ? {background: `linear-gradient(to right, ${typesColors[`${pokemon.data.types[0].toLowerCase()}`]}, ${typesColors[`${pokemon.data.types[1].toLowerCase()}`]})`}
                 : {backgroundColor: `${typesColors[`${pokemon.data.types[0].toLowerCase()}`]}`}
                 }>
-                <span onClick={deletePokemon}>&#10005;</span>
+                <span onMouseEnter={(event) => event.target.parentElement.parentElement.previousElementSibling.style.opacity = '1'} onClick={deletePokemon}>&#10005;</span>
                 <span className="for-hover" onMouseEnter={(event) => event.target.parentElement.parentElement.previousElementSibling.style.opacity = '1'}
                     onMouseLeave={(event) => event.target.parentElement.parentElement.previousElementSibling.style.opacity = '0'}></span>
                 <img className="sprite" src={`${pokemon.data.image}`} alt={`${pokemon.data.name}`} />
