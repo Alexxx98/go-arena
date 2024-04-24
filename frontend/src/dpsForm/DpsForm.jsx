@@ -410,12 +410,12 @@ function DpsForm(props) {
                         </div>
 
                         <div className="checkbox-container">
-                            <div className="checkbox">
+                            <div>
                                 <input id="is-shiny" type="checkbox" onClick={handleIsShinyClick} />
                                 <label htmlFor="is-shiny">Shiny</label>
                             </div>
 
-                            <div id="is-shadow-container" className="checkbox">
+                            <div id="is-shadow-container" >
                                 <input id="is-shadow" type="checkbox" onClick={handleIsShadowClick} />
                                 <label htmlFor="is-shadow">Shadow</label>
                             </div>
