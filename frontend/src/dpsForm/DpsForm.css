@@ -88,7 +88,7 @@
   margin: 0;
   margin-top: 50px;
   margin-bottom: 0;
-  transition: 0.3s ease;
+  transition: 0.5s ease;
 }
 .title:hover {
   opacity: 0.8;
@@ -119,9 +119,11 @@
   border-radius: 5px;
   text-align: center;
   font-size: 1.5rem;
+  color: hsla(0, 0%, 89%, 0.911);
   width: 90%;
   border: 2px solid hsla(219, 92%, 41%, 0.884);
-  transition: 0.3s ease;
+  background: none;
+  transition: 0.5s ease;
 }
 .form-container .form input[type=text]:focus {
   outline: none;
@@ -135,14 +137,15 @@
   margin-top: 5px;
   padding: 25px 45px;
   color: hsla(0, 0%, 89%, 0.911);
-  border: none;
+  border: 2px solid hsla(219, 92%, 41%, 0.884);
   border-radius: 15px;
   cursor: pointer;
-  background: linear-gradient(to bottom right, hsla(219, 92%, 41%, 0.884) 50%, hsla(0, 0%, 99%, 0.541));
-  transition: 0.3s ease;
+  background: none;
+  transition: 0.5s ease;
 }
 .form-container .form input[type=submit]:hover {
   background-color: hsl(219, 90%, 45%);
+  color: hsla(0, 0%, 7%, 0.863);
   transform: scale(1.1);
 }
 .form-container .form input[type=submit]:active {
@@ -154,12 +157,12 @@
     height: 0;
   }
   to {
-    height: 750px;
+    height: 840px;
   }
 }
 @keyframes hide-dps-calculator {
   from {
-    height: 750px;
+    height: 840px;
   }
   to {
     height: 0;
@@ -185,17 +188,20 @@
   margin-bottom: 20px;
   overflow: hidden;
 }
-.switch-buttons span {
+.switch-buttons .switch-container {
+  width: 50%;
+}
+.switch-buttons .switch-container span {
   font-size: 1.5rem;
   font-weight: bold;
   text-shadow: 5px 5px 5px black;
-  width: 50%;
+  width: 100%;
   padding: 10px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.5s ease;
 }
-.switch-buttons span:hover {
-  transform: scaleY(1.2);
+.switch-buttons .switch-container span:hover {
+  transform: scale(1.2);
 }
 
 .input-container {
@@ -213,11 +219,12 @@
   width: 95.5%;
   margin: 0 15px;
   overflow: hidden;
-  overflow-y: auto;
-  background: white;
+  overflow-y: scroll;
+  background: none;
   border-radius: 5px;
   transition: all 0.5s ease;
   z-index: 2;
+  scrollbar-width: none;
 }
 
 .suggestions-visible {
@@ -226,12 +233,14 @@
   width: 95.5%;
   margin: 0 15px;
   overflow: hidden;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid hsla(0, 0%, 7%, 0.863);
+  overflow-y: scroll;
+  background: hsla(0, 0%, 7%, 0.863);
+  border: 1px solid hsla(219, 92%, 41%, 0.884);
+  border-top: none;
   border-radius: 5px;
   transition: all 0.5s ease;
   z-index: 2;
+  scrollbar-width: none;
 }
 
 .suggestion {
@@ -240,13 +249,14 @@
   text-align: center;
   font-size: 1.5rem;
   cursor: pointer;
-  color: black;
+  color: hsla(0, 0%, 89%, 0.911);
+  background: none;
   padding: 10px;
   width: 100%;
 }
 
 .suggestion:hover {
-  background-color: hsla(0, 0%, 89%, 0.911);
+  background-color: hsla(219, 92%, 41%, 0.884);
 }
 
 .display-level {
@@ -257,6 +267,7 @@
   font-size: 1.25rem;
   width: 100%;
   transition: all 0.5s ease;
+  background: none;
 }
 .display-level p {
   padding: 20px 5px;
@@ -273,7 +284,8 @@
   margin: auto;
   margin-bottom: 19px;
   padding: 5px;
-  background-color: hsla(0, 1%, 37%, 0.856);
+  background: none;
+  border: 2px solid hsla(219, 92%, 41%, 0.884);
   border-radius: 15px;
   transition: 0.5s ease;
   cursor: pointer;
@@ -300,12 +312,12 @@
   }
 }
 .show-levels {
-  animation: show-level-suggestions 0.3s ease;
+  animation: show-level-suggestions 0.5s ease;
   display: "block";
 }
 
 .hide-levels {
-  animation: hide-level-suggestions 0.3s ease;
+  animation: hide-level-suggestions 0.5s ease;
   display: "none";
 }
 
@@ -317,18 +329,20 @@
   max-height: 150px;
   overflow: hidden;
   overflow-y: scroll;
-  border: 2px solid hsla(0, 0%, 7%, 0.863);
+  border: 2px solid hsla(219, 92%, 41%, 0.884);
   border-top: none;
   border-radius: 5px;
-  background-color: hsl(0, 1%, 37%);
+  background: none;
+  scrollbar-width: none;
 }
 
 .level {
   padding: 10px;
+  background-color: hsla(0, 0%, 7%, 0.863);
 }
 
 .level:hover {
-  background-color: hsla(0, 0%, 7%, 0.863);
+  background-color: hsla(219, 92%, 41%, 0.884);
 }
 
 .arrow {
@@ -338,7 +352,7 @@
   transform: rotate(-90deg);
   background: none;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.5s ease;
 }
 
 .active {
@@ -354,15 +368,56 @@
   font-weight: bold;
   font-size: 1.5rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 5px;
-  max-height: 50px;
 }
-.iv-container select {
-  width: 50px;
-  height: 30px;
-  margin: 5px;
+.iv-container p {
+  margin: 0;
+  padding: 0;
+}
+.iv-container .iv-display {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+.iv-container .current-value {
+  position: absolute;
+  right: -20%;
+}
+.iv-container input[type=range] {
+  appearance: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  border: 2px solid hsla(219, 92%, 41%, 0.884);
+  border-radius: 15px;
+  width: 160px;
+}
+.iv-container input[type=range]::-webkit-slider-runnable-track {
+  height: 20px;
+  background: none;
+}
+.iv-container input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border: 3px solid hsla(0, 0%, 7%, 0.863);
+  border-radius: 12px;
+  background: hsla(219, 92%, 41%, 0.884);
+  box-shadow: 0px 0px 3px 3px hsla(219, 92%, 41%, 0.884);
+}
+.iv-container input[type=range]::-moz-range-track {
+  height: 20px;
+}
+.iv-container input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 3px solid #000000;
+  border-radius: 15px;
+  box-shadow: 0px 0px 3px 3px hsla(219, 92%, 41%, 0.884);
+  background: hsla(219, 92%, 41%, 0.884);
 }
 
 .checkbox-container {
@@ -384,7 +439,7 @@
   width: 25px;
   height: 20px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.5s ease;
 }
 .checkbox-container input:hover {
   color: hsla(0, 1%, 37%, 0.856);

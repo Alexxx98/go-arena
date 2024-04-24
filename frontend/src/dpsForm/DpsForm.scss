@@ -2,8 +2,8 @@ $primary-color: hsla(0, 0%, 7%, 0.863);
 $secondary-color: hsla(0, 1%, 37%, 0.856);
 $text-color: hsla(0, 0%, 89%, 0.911);
 $decorative-color: hsla(219, 92%, 41%, 0.884);
-$short-transition-time: 0.3s;
-$form-height: 720px;
+$short-transition-time: 0.5s;
+$form-height: 840px;
 
 @font-face {
     font-family: 'PocketMonk';
@@ -16,8 +16,13 @@ $form-height: 720px;
 }
 
 @keyframes rotate-the-ball {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 // .container {
@@ -98,7 +103,9 @@ $form-height: 720px;
     text-shadow: 8px 8px hsla(219, 92%, 41%, 0.884);
     color: hsla(0, 2%, 84%, 0.801);
     cursor: pointer;
-    margin-top: 80px;
+    line-height: 1.5;
+    margin: 0;
+    margin-top: 50px;
     margin-bottom: 0;
     transition: $short-transition-time ease;
 
@@ -116,7 +123,7 @@ $form-height: 720px;
     max-width: 960px;
     border-bottom: 5px solid;
     border-image: linear-gradient(to right, $decorative-color, $secondary-color) 1;
-    
+
 
     .form {
         color: $text-color;
@@ -133,8 +140,10 @@ $form-height: 720px;
             border-radius: 5px;
             text-align: center;
             font-size: 1.5rem;
+            color: $text-color;
             width: 90%;
             border: 2px solid $decorative-color;
+            background: none;
             transition: $short-transition-time ease;
         }
 
@@ -152,17 +161,18 @@ $form-height: 720px;
             margin-top: 5px;
             padding: 25px 45px;
             color: $text-color;
-            border: none;
+            border: 2px solid $decorative-color;
             border-radius: 15px;
             cursor: pointer;
-            background: linear-gradient(to bottom right, $decorative-color 50%, hsla(0, 0%, 99%, 0.541));
+            background: none;
             transition: $short-transition-time ease;
         }
 
         input[type='submit']:hover {
             background-color: hsl(219, 90%, 45%);
+            color: $primary-color;
             transform: scale(1.1)
-        } 
+        }
 
         input[type='submit']:active {
             transform: scale(0.9);
@@ -170,14 +180,24 @@ $form-height: 720px;
     }
 }
 
-@keyframes show-dps-calculator{
-    from {height: 0;}
-    to {height: $form-height;}
+@keyframes show-dps-calculator {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: $form-height;
+    }
 }
 
 @keyframes hide-dps-calculator {
-    from {height: $form-height;}
-    to {height: 0;}
+    from {
+        height: $form-height;
+    }
+
+    to {
+        height: 0;
+    }
 }
 
 .form-content-visible {
@@ -191,7 +211,7 @@ $form-height: 720px;
 }
 
 .switch-buttons {
-    font-family: 'PokemonSolidFont',Arial , 'sans-serif';
+    font-family: 'PokemonSolidFont', Arial, 'sans-serif';
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -199,19 +219,23 @@ $form-height: 720px;
     border-image: linear-gradient(to right, $decorative-color, $secondary-color) 1;
     margin-bottom: 20px;
     overflow: hidden;
-    
-    span {
-        font-size: 1.5rem;
-        font-weight: bold;
-        text-shadow: 5px 5px 5px black;
-        width: 50%;
-        padding: 25px;
-        cursor: pointer;
-        transition: $short-transition-time ease;
-    }
 
-    span:hover {
-        transform: scaleY(1.2);
+    .switch-container {
+        width: 50%;
+
+        span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 5px 5px 5px black;
+            width: 100%;
+            padding: 10px;
+            cursor: pointer;
+            transition: $short-transition-time ease;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
     }
 }
 
@@ -230,11 +254,12 @@ $form-height: 720px;
     width: 95.5%;
     margin: 0 15px;
     overflow: hidden;
-    overflow-y: auto;
-    background: white;
+    overflow-y: scroll;
+    background: none;
     border-radius: 5px;
     transition: all 0.5s ease;
     z-index: 2;
+    scrollbar-width: none;
 }
 
 .suggestions-visible {
@@ -243,12 +268,14 @@ $form-height: 720px;
     width: 95.5%;
     margin: 0 15px;
     overflow: hidden;
-    overflow-y: auto;
-    background: white;
-    border: 1px solid $primary-color;
+    overflow-y: scroll;
+    background: $primary-color;
+    border: 1px solid $decorative-color;
+    border-top: none;
     border-radius: 5px;
     transition: all 0.5s ease;
     z-index: 2;
+    scrollbar-width: none;
 }
 
 .suggestion {
@@ -257,13 +284,14 @@ $form-height: 720px;
     text-align: center;
     font-size: 1.5rem;
     cursor: pointer;
-    color: black;
+    color: $text-color;
+    background: none;
     padding: 10px;
     width: 100%;
 }
 
 .suggestion:hover {
-    background-color: $text-color;
+    background-color: $decorative-color;
 }
 
 .display-level {
@@ -274,6 +302,7 @@ $form-height: 720px;
     font-size: 1.25rem;
     width: 100%;
     transition: all 0.5s ease;
+    background: none;
 
     p {
         padding: 20px 5px;
@@ -291,7 +320,8 @@ $form-height: 720px;
     margin: auto;
     margin-bottom: 19px;
     padding: 5px;
-    background-color: $secondary-color;
+    background: none;
+    border: 2px solid $decorative-color;
     border-radius: 15px;
     transition: 0.5s ease;
     cursor: pointer;
@@ -303,13 +333,23 @@ $form-height: 720px;
 }
 
 @keyframes show-level-suggestions {
-    from {height: 0px;}
-    to {height: 150px;}
+    from {
+        height: 0px;
+    }
+
+    to {
+        height: 150px;
+    }
 }
 
 @keyframes hide-level-suggestions {
-    from {height: 150px;}
-    to {height: 0px;}
+    from {
+        height: 150px;
+    }
+
+    to {
+        height: 0px;
+    }
 }
 
 .show-levels {
@@ -319,7 +359,7 @@ $form-height: 720px;
 
 .hide-levels {
     animation: hide-level-suggestions $short-transition-time ease;
-    display: 'none';   
+    display: 'none';
 }
 
 .level-suggestions {
@@ -330,18 +370,20 @@ $form-height: 720px;
     max-height: 150px;
     overflow: hidden;
     overflow-y: scroll;
-    border: 2px solid $primary-color;
+    border: 2px solid $decorative-color;
     border-top: none;
     border-radius: 5px;
-    background-color: hsl(0, 1%, 37%);
+    background: none;
+    scrollbar-width: none;
 }
 
 .level {
     padding: 10px;
+    background-color: $primary-color;
 }
 
 .level:hover {
-    background-color: $primary-color;
+    background-color: $decorative-color;
 }
 
 .arrow {
@@ -367,16 +409,65 @@ $form-height: 720px;
     font-weight: bold;
     font-size: 1.5rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 5px;
-    max-height: 50px;
 
-    select {
-        width: 50px;
-        height: 30px;
-        margin: 5px;
+    p {
+        margin: 0;
+        padding: 0;
     }
+
+    .iv-display {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .current-value {
+        position: absolute;
+        right: -20%;
+    }
+
+    input[type=range] {
+        appearance: none;
+        background: none;
+        outline: none;
+        cursor: pointer;
+        border: 2px solid $decorative-color;
+        border-radius: 15px;
+        width: 160px;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+        height: 20px;
+        background: none;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 20px;
+        width: 20px;
+        border: 3px solid $primary-color;
+        border-radius: 12px;
+        background: $decorative-color;
+        box-shadow: 0px 0px 3px 3px $decorative-color;
+    }
+
+    input[type=range]::-moz-range-track {
+        height: 20px;
+    }
+
+    input[type=range]::-moz-range-thumb {
+        box-shadow: 0px 0px 0px #000000;
+        border: 3px solid #000000;
+        border-radius: 15px;
+        box-shadow: 0px 0px 3px 3px $decorative-color;
+        background: $decorative-color;
+    }
+
 }
 
 .checkbox-container {
@@ -390,7 +481,7 @@ $form-height: 720px;
     div {
         margin: 5px;
     }
-    
+
     label {
         margin: 5px;
         text-shadow: 5px 5px black;
