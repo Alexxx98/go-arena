@@ -6,6 +6,10 @@
   font-family: "PokemonSolidFont";
   src: url("../assets/PokemonSolidNormal-xyWR.ttf");
 }
+@font-face {
+  font-family: "PokemonHollowFont";
+  src: url("../assets/PokemonHollowNormal-pyPZ.ttf");
+}
 @keyframes rotate-the-ball {
   from {
     transform: rotate(0deg);
@@ -102,7 +106,7 @@
   transition: all 1s linear;
   max-width: 960px;
   border-bottom: 5px solid;
-  border-image: linear-gradient(to right, hsla(219, 92%, 41%, 0.884), hsla(0, 1%, 37%, 0.856)) 1;
+  border-image: linear-gradient(to right, hsla(0, 0%, 7%, 0.863), hsla(219, 92%, 41%, 0.884), hsla(219, 92%, 41%, 0.884), hsla(0, 0%, 7%, 0.863)) 1;
 }
 .form-container .form {
   color: hsla(0, 0%, 89%, 0.911);
@@ -157,12 +161,12 @@
     height: 0;
   }
   to {
-    height: 840px;
+    height: 880px;
   }
 }
 @keyframes hide-dps-calculator {
   from {
-    height: 840px;
+    height: 880px;
   }
   to {
     height: 0;
@@ -179,29 +183,40 @@
 }
 
 .switch-buttons {
-  font-family: "PokemonSolidFont", Arial, "sans-serif";
+  font-family: "PokemonHollowFont", Arial, "sans-serif";
   position: relative;
   display: flex;
   justify-content: space-between;
   border-bottom: 3px solid;
-  border-image: linear-gradient(to right, hsla(219, 92%, 41%, 0.884), hsla(0, 1%, 37%, 0.856)) 1;
+  border-image: linear-gradient(to right, hsla(0, 0%, 7%, 0.863), hsla(219, 92%, 41%, 0.884), hsla(219, 92%, 41%, 0.884), hsla(0, 0%, 7%, 0.863)) 1;
   margin-bottom: 20px;
   overflow: hidden;
 }
-.switch-buttons .switch-container {
-  width: 50%;
-}
-.switch-buttons .switch-container span {
-  font-size: 1.5rem;
+.switch-buttons span {
+  font-size: 2rem;
   font-weight: bold;
   text-shadow: 5px 5px 5px black;
   width: 100%;
-  padding: 10px;
+  padding: 0;
   cursor: pointer;
+}
+
+.highlight-to-left {
+  background: linear-gradient(to left, hsla(219, 92%, 41%, 0.884), hsla(0, 0%, 7%, 0.863) 50%, transparent 50%) left;
+  background-size: 200%;
   transition: 0.5s ease;
 }
-.switch-buttons .switch-container span:hover {
-  transform: scale(1.2);
+.highlight-to-left:hover {
+  background-position: right;
+}
+
+.highlight-to-right {
+  background: linear-gradient(to left, transparent 50%, hsla(0, 0%, 7%, 0.863) 10%, hsla(219, 92%, 41%, 0.884)) right;
+  background-size: 200%;
+  transition: 0.5s ease;
+}
+.highlight-to-right:hover {
+  background-position: left;
 }
 
 .input-container {

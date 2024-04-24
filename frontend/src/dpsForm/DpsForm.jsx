@@ -150,20 +150,20 @@ function DpsForm(props) {
     }, [fastMoveSuggestions, chargedMoveSuggestions]);
 
     // Switch background of switches
-    useEffect(() => {
-        const switches = document.getElementById("switches");
-        const byLevelSwitch = switches.children[0];
-        const byCpSwitch = switches.children[1];
+    // useEffect(() => {
+    //     const switches = document.getElementById("switches");
+    //     const byLevelSwitch = switches.children[0];
+    //     const byCpSwitch = switches.children[1];
 
-        if (formByLevel) {
-            byLevelSwitch.style.background = "linear-gradient(to right, hsla(0, 0%, 7%, 0.863), hsla(219, 92%, 41%, 0.884)";
-            byCpSwitch.style.background = "none";
-        } else {
-            byLevelSwitch.style.background = "none";
-            byCpSwitch.style.background = "linear-gradient(to right, hsla(219, 92%, 41%, 0.884), hsla(0, 0%, 7%, 0.863)";
-        }
+    //     if (formByLevel) {
+    //         byLevelSwitch.className = "to-left-gradient";
+    //         byCpSwitch.className = "highlight-to-right";
+    //     } else {
+    //         byCpSwitch.className = "to-right-gradient";
+    //         byLevelSwitch.className = "highlight-to-left";
+    //     }
 
-    }, [formByLevel])
+    // }, [formByLevel])
 
     function showSuggestions(event) {
         const suggestions = event.target.nextSibling;
@@ -346,12 +346,8 @@ function DpsForm(props) {
                     <div id="form-content" className={isFormVisible ? "form-content-visible" : "form-content-hidden"}>
                         {/* Form changing buttons */}
                         <div id="switches" className="switch-buttons">
-                            <div className="switch-container">
-                                <span onClick={() => setFormByLevel(true)}>Calculate by level</span>
-                            </div>
-                            <div className="switch-container">
-                                <span onClick={() => setFormByLevel(false)}>Calculate by CP</span>
-                            </div>
+                            <span className="highlight-to-left" onClick={() => setFormByLevel(true)}>Calculate by level</span>
+                            <span className="highlight-to-right" onClick={() => setFormByLevel(false)}>Calculate by CP</span>
                         </div>
 
                         <div className="input-container">

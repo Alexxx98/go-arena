@@ -3,7 +3,7 @@ $secondary-color: hsla(0, 1%, 37%, 0.856);
 $text-color: hsla(0, 0%, 89%, 0.911);
 $decorative-color: hsla(219, 92%, 41%, 0.884);
 $short-transition-time: 0.5s;
-$form-height: 840px;
+$form-height: 880px;
 
 @font-face {
     font-family: 'PocketMonk';
@@ -15,6 +15,11 @@ $form-height: 840px;
     src: url('../assets/PokemonSolidNormal-xyWR.ttf')
 }
 
+@font-face {
+    font-family: 'PokemonHollowFont';
+    src: url('../assets/PokemonHollowNormal-pyPZ.ttf')
+}
+
 @keyframes rotate-the-ball {
     from {
         transform: rotate(0deg);
@@ -24,11 +29,6 @@ $form-height: 840px;
         transform: rotate(360deg);
     }
 }
-
-// .container {
-//     background: linear-gradient(to bottom, hsl(0, 0%, 19%), hsl(0, 0%, 7%));
-//     border-top: 1px solid;
-// }
 
 #title-container {
     height: 300px;
@@ -122,7 +122,7 @@ $form-height: 840px;
     transition: all 1s linear;
     max-width: 960px;
     border-bottom: 5px solid;
-    border-image: linear-gradient(to right, $decorative-color, $secondary-color) 1;
+    border-image: linear-gradient(to right, $primary-color, $decorative-color, $decorative-color, $primary-color ) 1;
 
 
     .form {
@@ -211,33 +211,45 @@ $form-height: 840px;
 }
 
 .switch-buttons {
-    font-family: 'PokemonSolidFont', Arial, 'sans-serif';
+    font-family: 'PokemonHollowFont', Arial, 'sans-serif';
     position: relative;
     display: flex;
     justify-content: space-between;
     border-bottom: 3px solid;
-    border-image: linear-gradient(to right, $decorative-color, $secondary-color) 1;
+    border-image: linear-gradient(to right, $primary-color, $decorative-color, $decorative-color, $primary-color ) 1;
     margin-bottom: 20px;
     overflow: hidden;
 
-    .switch-container {
-        width: 50%;
-
-        span {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-shadow: 5px 5px 5px black;
-            width: 100%;
-            padding: 10px;
-            cursor: pointer;
-            transition: $short-transition-time ease;
-
-            &:hover {
-                transform: scale(1.2);
-            }
-        }
+    span {
+        font-size: 2rem;
+        font-weight: bold;
+        text-shadow: 5px 5px 5px black;
+        width: 100%;
+        padding: 0;
+        cursor: pointer;
     }
 }
+
+.highlight-to-left {
+    background: linear-gradient(to left, $decorative-color, $primary-color 50%, transparent 50%) left;
+    background-size: 200%;
+    transition: 0.5s ease;
+
+    &:hover {
+        background-position: right;
+    }
+}
+
+.highlight-to-right {
+    background: linear-gradient(to left, transparent 50%, $primary-color 10%, $decorative-color) right;
+    background-size: 200%;
+    transition: 0.5s ease;
+
+    &:hover {
+        background-position: left;
+    }
+}
+
 
 .input-container {
     position: relative;
