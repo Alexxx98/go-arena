@@ -4,7 +4,6 @@ function ErrorMessage() {
 
     function hideErrorMessage(event) {
         const message = event.target.parentElement;
-        console.log(message);
         message.className = 'hidden';
         setTimeout(() => {
             message.parentElement.style.zIndex = '-1';

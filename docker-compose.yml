@@ -2,16 +2,19 @@ version: "3.8"
 
 networks:
   db-net:
-  app-net:
+  backend-app-net:
+  frontend-app-net:
 
 volumes:
   db_data:
 
 services:
   data_base:
-    image: postgres
+    image: postgres:alpine
     volumes:
       - db_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
     env_file:
       - postgres.env
     networks:
@@ -24,7 +27,7 @@ services:
       - 8080:8080
     networks:
       - db-net
-      - app-net
+      - backend-app-net
     depends_on:
       - data_base
 
@@ -34,7 +37,7 @@ services:
     ports:
       - 3000:3000
     networks:
-      - app-net
+      - frontend-app-net
 
   gateway:
     build: ./nginx
@@ -44,4 +47,5 @@ services:
       - backend
       - frontend
     networks:
-      - app-net
+      - frontend-app-net
+      - backend-app-net

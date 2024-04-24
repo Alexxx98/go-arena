@@ -12,7 +12,7 @@ function DpsForm(props) {
     const [pokemonData, setPokemonData] = useState(props.pokemonData)
     const shadowPokemonList = props.shadowPokemonList;
 
-    const apiUrl = "http://127.0.0.1:8080/api/pokemon/"
+    const apiUrl = "http://pokemongoarena.epicgamer.org/api/pokemon/"
 
     // variables for input values
     const [storageLoaded, setStorageLoaded] = useState(false);
@@ -42,8 +42,8 @@ function DpsForm(props) {
             pokemon[0] === pokemonName
         ));
 
-        setFastMoveSuggestions(pokemon[0][1]);
-        setChargedMoveSuggestions(pokemon[0][2]);
+        setFastMoveSuggestions(pokemon[1]);
+        setChargedMoveSuggestions(pokemon[2]);
 
     }, [storageLoaded])
 
@@ -117,7 +117,6 @@ function DpsForm(props) {
             console.error("Error fetching data", error);
             loadingScreen.style.display = 'none';
             const errorMessage = document.getElementById("error-message-display");
-            console.log(errorMessage);
             errorMessage.parentElement.style.zIndex = '10';
             errorMessage.classList.remove('hidden');
         })
