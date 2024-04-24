@@ -248,7 +248,7 @@ function DpsForm(props) {
         isShadowContainer.style.display = 'none';
         shadowPokemonList.forEach(name => {
             if (name === pokemonName || 'Groudon' === pokemonName || 'Kyogre' === pokemonName) {
-                isShadowContainer.style.display = 'block';
+                isShadowContainer.style.display = 'flex';
                 return;
             }
         })
@@ -410,12 +410,12 @@ function DpsForm(props) {
                         </div>
 
                         <div className="checkbox-container">
-                            <div>
+                            <div className="checkbox">
                                 <input id="is-shiny" type="checkbox" onClick={handleIsShinyClick} />
                                 <label htmlFor="is-shiny">Shiny</label>
                             </div>
 
-                            <div id="is-shadow-container">
+                            <div id="is-shadow-container" className="checkbox">
                                 <input id="is-shadow" type="checkbox" onClick={handleIsShadowClick} />
                                 <label htmlFor="is-shadow">Shadow</label>
                             </div>

@@ -453,7 +453,12 @@ $form-height: 840px;
         border: 3px solid $primary-color;
         border-radius: 12px;
         background: $decorative-color;
-        box-shadow: 0px 0px 3px 3px $decorative-color;
+        transition: 0.3s ease;
+
+        &:hover {
+            box-shadow: 0px 0px 3px 3px $decorative-color;
+            transform: scale(1.1)
+        }
     }
 
     input[type=range]::-moz-range-track {
@@ -464,8 +469,13 @@ $form-height: 840px;
         box-shadow: 0px 0px 0px #000000;
         border: 3px solid #000000;
         border-radius: 15px;
-        box-shadow: 0px 0px 3px 3px $decorative-color;
         background: $decorative-color;
+        transition: 0.3s ease;
+
+        &:hover {
+            box-shadow: 0px 0px 3px 3px $decorative-color;
+            transform: scale(1.1)
+        }
     }
 
 }
@@ -473,12 +483,16 @@ $form-height: 840px;
 .checkbox-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5rem;
     font-weight: bold;
     margin: 20px;
 
     div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin: 5px;
     }
 
@@ -488,13 +502,35 @@ $form-height: 840px;
     }
 
     input {
+        appearance: none;
+        -webkit-appearance: none;
+        display: grid;
+        place-content: center;
+        border: 1px solid $decorative-color;
         width: 25px;
-        height: 20px;
+        height: 25px;
         cursor: pointer;
-        transition: $short-transition-time ease;
+        background: none;
+        transition: 0.5s ease-in-out;
+        padding: 10px;
+
+        &::before {
+            content: "";
+            width: 0.75rem;
+            height: 0.75rem;
+            transform: scale(0);
+            background-color: $decorative-color;
+            transition: 0.3s transform ease-in-out;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+
+        &:checked::before {
+            transform: scale(1);
+        }
 
         &:hover {
-            color: $secondary-color;
+            transform: scale(1.1);
+            box-shadow: 2px 2px 3px 2px black;
         }
 
     }
