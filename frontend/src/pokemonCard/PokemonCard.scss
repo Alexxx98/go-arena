@@ -63,6 +63,7 @@ $pokemon-height: 150px;
     justify-content: center;
     width: 100vw;
     overflow: hidden;
+    background-color: black;
 }
 
 .show-sprite {
@@ -79,7 +80,6 @@ $pokemon-height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
 }
 
 .card-shadow-box {
