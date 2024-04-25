@@ -114,7 +114,7 @@
   margin: 0;
   margin-top: 50px;
   margin-bottom: 0;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
 }
 .title:hover {
   opacity: 0.8;
@@ -150,7 +150,7 @@
   width: 90%;
   border: 2px solid hsla(219, 92%, 41%, 0.884);
   background: none;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
 }
 .form-container .form input[type=text]:focus {
   outline: none;
@@ -165,7 +165,7 @@
   border-radius: 15px;
   cursor: pointer;
   background: none;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
 }
 .form-container .form input[type=submit]:hover {
   background-color: hsl(219, 90%, 45%);
@@ -372,12 +372,12 @@
   }
 }
 .show-levels {
-  animation: show-level-suggestions 0.5s ease;
+  animation: show-level-suggestions 0.3s ease;
   display: "block";
 }
 
 .hide-levels {
-  animation: hide-level-suggestions 0.5s ease;
+  animation: hide-level-suggestions 0.3s ease;
   display: "none";
 }
 
@@ -412,7 +412,7 @@
   transform: rotate(-90deg);
   background: none;
   cursor: pointer;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
 }
 
 .active {
