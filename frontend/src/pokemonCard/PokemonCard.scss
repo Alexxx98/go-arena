@@ -31,6 +31,9 @@ $pokemon-height: 150px;
 #button-container {
     display: flex;
     justify-content: center;
+    width: 100%;
+    margin: auto;
+    background-color: black;
 
     button {
         font-family: 'PocketMonk', Helvetica, sans-serif;
