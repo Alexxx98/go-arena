@@ -162,10 +162,6 @@ $form-height: 880px;
             outline: none;
         }
 
-        input[type='text']:hover {
-            transform: scale(1.1);
-        }
-
         input[type='submit'] {
             font-size: 2rem;
             font-weight: bold;
@@ -269,6 +265,36 @@ $form-height: 880px;
     margin: 30px 0px;
     margin: 30px auto;
     transition: 0.5s ease;
+
+    label {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.25rem;
+        position: absolute;
+        left: 5%;
+        padding: 10px;
+        bottom: 50%;
+        transform: translateY(50%);
+        transition: 0.5s ease;
+        border-radius: 5px;
+    }
+}
+
+.on-focus {
+    input:focus~label {
+        color: $text-color;
+        transform: translateY(-30%) translateX(10%);
+        color: $primary-color;
+        background-color: hsla(219, 92%, 41%, 1);
+    }
+}
+
+.dropdown {
+    button {
+        position: absolute;
+        right: 5%;
+        bottom: 20%;
+        cursor: default;
+    }
 }
 
 .suggestions {

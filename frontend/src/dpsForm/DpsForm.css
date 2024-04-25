@@ -143,9 +143,6 @@
 .form-container .form input[type=text]:focus {
   outline: none;
 }
-.form-container .form input[type=text]:hover {
-  transform: scale(1.1);
-}
 .form-container .form input[type=submit] {
   font-size: 2rem;
   font-weight: bold;
@@ -237,6 +234,31 @@
   margin: 30px 0px;
   margin: 30px auto;
   transition: 0.5s ease;
+}
+.input-container label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.25rem;
+  position: absolute;
+  left: 5%;
+  padding: 10px;
+  bottom: 50%;
+  transform: translateY(50%);
+  transition: 0.5s ease;
+  border-radius: 5px;
+}
+
+.on-focus input:focus ~ label {
+  color: hsla(0, 0%, 89%, 0.911);
+  transform: translateY(-30%) translateX(10%);
+  color: hsla(0, 0%, 7%, 0.863);
+  background-color: hsl(219, 92%, 41%);
+}
+
+.dropdown button {
+  position: absolute;
+  right: 5%;
+  bottom: 20%;
+  cursor: default;
 }
 
 .suggestions {

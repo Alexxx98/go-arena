@@ -167,10 +167,18 @@ function DpsForm(props) {
 
     function showSuggestions(event) {
         const suggestions = event.target.nextSibling;
+        const container = event.target.parentElement;
+        const arrow = event.target.nextSibling.nextSibling;
 
         if (suggestions.className === "suggestions") {
-            suggestions.className = "suggestions-visible";
+            container.classList.add("on-focus");
+            arrow.className = "arrow active";
+            setTimeout(() => {
+                suggestions.className = "suggestions-visible";
+            }, 100);
         } else {
+            container.classList.remove("on-focus");
+            arrow.className = "arrow unactive"
             suggestions.className = "suggestions";
         }
     }
@@ -197,8 +205,15 @@ function DpsForm(props) {
 
     }
 
-    function hideSuggestions(event) {
-        const levels = document.getElementById("level-suggestions");
+    function showNameSuggestions() {
+        const suggestions = document.getElementById("name-suggestions");
+        suggestions.className = "suggestions-visible";
+    }
+
+    function hideNameSuggestions() {
+        const suggestions = document.getElementById("name-suggestions");
+        setTimeout(() => { suggestions.className = "suggestions" }, 100);
+
     }
 
     function handlePokemonNameChange(event) {
@@ -259,6 +274,8 @@ function DpsForm(props) {
         setFastMove(event.target.innerText);
 
         const suggestions = document.getElementById("fast-move-suggestions");
+        const arrow = document.getElementById("fast-move-arrow");
+        arrow.className = "arrow unactive";
         suggestions.className = "suggestions";
 
     }
@@ -268,6 +285,8 @@ function DpsForm(props) {
         setChargedMove(event.target.innerText);
 
         const suggestions = document.getElementById("charged-move-suggestions");
+        const arrow = document.getElementById("charged-move-arrow");
+        arrow.className = "arrow unactive";
         suggestions.className = "suggestions";
 
     }
@@ -339,7 +358,7 @@ function DpsForm(props) {
                 <h1 className="title" onClick={toggleFormVisibility}>DPS & TDO Pokemon Calculator</h1>
             </div>
 
-            <div className="form-container" onClick={hideSuggestions}>
+            <div className="form-container">
                 <div className="form">
                     <br />
 
@@ -350,25 +369,31 @@ function DpsForm(props) {
                             <span className="highlight-to-right" onClick={() => setFormByLevel(false)}>Calculate by CP</span>
                         </div>
 
-                        <div className="input-container">
-                            <input type="text" placeholder="Pokemon Name" value={pokemonName} onChange={handlePokemonNameChange} onClick={showSuggestions} />
+                        <div className="input-container on-focus">
+                            <input type="text" value={pokemonName} onChange={handlePokemonNameChange} onFocus={showNameSuggestions} onBlur={hideNameSuggestions} />
                             <div id="name-suggestions" className="suggestions">
                                 {nameSuggestionsList}
                             </div>
+                            <label>Pokemon Name:</label>
                         </div>
 
-                        <div className="input-container">
-                            <input type="text" placeholder="Fast Move" value={fastMove} onChange={handleFastMovecChange} onClick={showSuggestions} />
+                        <div className="input-container dropdown">
+                            <input readOnly type="text" style={{ cursor: "pointer" }} value={fastMove} onChange={handleFastMovecChange} onClick={showSuggestions} />
                             <div id="fast-move-suggestions" className="suggestions">
                                 {fastMoveSuggestionsList}
                             </div>
+                            <button id="fast-move-arrow" className="arrow" >&#8249;</button>
+                            <label>Fast Move:</label>
                         </div>
 
-                        <div className="input-container">
-                            <input type="text" placeholder="Charged Move" value={chargedMove} onChange={handleChargedMoveChange} onClick={showSuggestions} />
+                        <div className="input-container dropdown">
+                            <input readOnly type="text" style={{ cursor: "pointer" }} value={chargedMove} onChange={handleChargedMoveChange} onClick={showSuggestions} />
                             <div id="charged-move-suggestions" className="suggestions">
                                 {chargedMoveSuggestionsList}
                             </div>
+                            <button id="charged-move-arrow" className="arrow" onClick={showSuggestions}>&#8249;</button>
+                            <label>Charged Move:</label>
+
                         </div>
 
                         {formByLevel
@@ -382,8 +407,9 @@ function DpsForm(props) {
                                     {levelsList}
                                 </div>
                             </div>
-                            : <div id="cp-input" className="input-container">
-                                <input type="text" placeholder="CP" value={cp} onChange={changeCp} />
+                            : <div id="cp-input" className="input-container on-focus">
+                                <input type="text" value={cp} onChange={changeCp} />
+                                <label>Cp:</label>
                             </div>
                         }
 
