@@ -343,7 +343,7 @@ function DpsForm(props) {
                 <div className="form">
                     <br />
 
-                    <div id="form-content" className={isFormVisible ? "form-content-visible" : "form-content-hidden"}>
+                    <div id="form-content">
                         {/* Form changing buttons */}
                         <div id="switches" className="switch-buttons">
                             <span className="highlight-to-left" onClick={() => setFormByLevel(true)}>Calculate by level</span>

@@ -30,10 +30,21 @@ $form-height: 880px;
     }
 }
 
+.container {
+    background: linear-gradient(to bottom, $primary-color, black);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 #title-container {
     height: 300px;
     position: relative;
     min-width: 960px;
+    max-width: 960px;
+    margin-top: 50px;
 }
 
 #shiny-snorlax {
@@ -117,10 +128,10 @@ $form-height: 880px;
 .form-container {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
     transition: all 1s linear;
     max-width: 960px;
+    width: 100%;
     border-bottom: 5px solid;
     border-image: linear-gradient(to right, $primary-color, $decorative-color, $decorative-color, $primary-color ) 1;
 
@@ -450,7 +461,7 @@ $form-height: 880px;
         cursor: pointer;
         border: 2px solid $decorative-color;
         border-radius: 15px;
-        width: 160px;
+        width: 200px;
     }
 
     input[type=range]::-webkit-slider-runnable-track {

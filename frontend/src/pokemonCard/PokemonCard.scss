@@ -8,14 +8,24 @@ $pokemon-height: 150px;
     src: url('../assets/PocketMonk-15ze.ttf')
 }
 
-@keyframes show-sprite{
-    from {height: 0px;}
-    to {height: $pokemon-height;}
+@keyframes show-sprite {
+    from {
+        height: 0px;
+    }
+
+    to {
+        height: $pokemon-height;
+    }
 }
 
-@keyframes hide-sprite{
-    from {height: $pokemon-height;}
-    to {height: 0px;}
+@keyframes hide-sprite {
+    from {
+        height: $pokemon-height;
+    }
+
+    to {
+        height: 0px;
+    }
 }
 
 #button-container {
@@ -69,6 +79,7 @@ $pokemon-height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: black;
 }
 
 .card-shadow-box {

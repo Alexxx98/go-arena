@@ -18,10 +18,21 @@
     transform: rotate(360deg);
   }
 }
+.container {
+  background: linear-gradient(to bottom, hsla(0, 0%, 7%, 0.863), black);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 #title-container {
   height: 300px;
   position: relative;
   min-width: 960px;
+  max-width: 960px;
+  margin-top: 50px;
 }
 
 #shiny-snorlax {
@@ -101,10 +112,10 @@
 .form-container {
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
   transition: all 1s linear;
   max-width: 960px;
+  width: 100%;
   border-bottom: 5px solid;
   border-image: linear-gradient(to right, hsla(0, 0%, 7%, 0.863), hsla(219, 92%, 41%, 0.884), hsla(219, 92%, 41%, 0.884), hsla(0, 0%, 7%, 0.863)) 1;
 }
@@ -409,7 +420,7 @@
   cursor: pointer;
   border: 2px solid hsla(219, 92%, 41%, 0.884);
   border-radius: 15px;
-  width: 160px;
+  width: 200px;
 }
 .iv-container input[type=range]::-webkit-slider-runnable-track {
   height: 20px;

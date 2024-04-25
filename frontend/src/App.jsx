@@ -26,15 +26,15 @@ function App() {
       const currentMovesResponse = await fetch(PoGOAPI + currentPokemonMoves);
       const shadowPokemonResponse = await fetch(PoGOAPI + shadowPokemonEndpoint);
       const megaPokemonResponse = await fetch(PoGOAPI + megaPokemonEndpoint);
-  
+
       if (!currentMovesResponse.ok || !shadowPokemonResponse || !megaPokemonResponse) {
         throw new Error("Could not fetch data");
       }
-  
+
       const currentMovesData = await currentMovesResponse.json()
       const shadowPokemonData = await shadowPokemonResponse.json()
       const megaPokemonData = await megaPokemonResponse.json()
-      
+
       setPokemonData([])
       setShadowPokemonList([]);
 
@@ -43,14 +43,14 @@ function App() {
         const pokemon = currentMovesData[index]
         const pokemonChargedMoves = pokemon.charged_moves.concat(pokemon.elite_charged_moves)
         const pokemonName = ['Normal', 'Standard'].includes(pokemon.form)
-        ? pokemon.pokemon_name
-        : pokemon.form === 'Galarian_standard'
-        ? 'Galarian' + " " + pokemon.pokemon_name
-        : pokemon.form + " " + pokemon.pokemon_name
+          ? pokemon.pokemon_name
+          : pokemon.form === 'Galarian_standard'
+            ? 'Galarian' + " " + pokemon.pokemon_name
+            : pokemon.form + " " + pokemon.pokemon_name
         pokemon.pokemon_name === 'Rayquaza' && pokemonChargedMoves.push('Dragon Ascent')
         if (validForms.includes(pokemon.form)) {
-          setPokemonData(prevPokemonData => ([...prevPokemonData, 
-            [pokemonName,
+          setPokemonData(prevPokemonData => ([...prevPokemonData,
+          [pokemonName,
             pokemon.fast_moves.concat(pokemon.elite_fast_moves),
             pokemonChargedMoves]
           ]))
@@ -77,18 +77,18 @@ function App() {
           if (pokemon.pokemon_name === data.pokemon_name && !pokemonMegaNamesList.includes(pokemon.mega_name)) {
             pokemonMegaNamesList.push(pokemon.mega_name);
             setPokemonData(prevPokemonData => ([...prevPokemonData, [
-                pokemon.mega_name,
-                data.fast_moves.concat(data.elite_fast_moves),
-                pokemonChargedMoves
-              ]]
+              pokemon.mega_name,
+              data.fast_moves.concat(data.elite_fast_moves),
+              pokemonChargedMoves
+            ]]
             ))
           }
         }
       })
     }
 
-  
-    catch(error){
+
+    catch (error) {
       console.error(error);
     }
   }
@@ -112,13 +112,28 @@ function App() {
     });
   }
 
+  useEffect(() => {
+    const dpsContainer = document.getElementById("dps-container");
+    dpsContainer.classList.add("translate-up");
+    const timeout = setTimeout(() => {
+      dpsContainer.classList.remove("translate-up");
+    }, 10);
+
+    return () => {
+      clearTimeout(timeout);
+    }
+
+  }, [])
+
   return (
     <>
-      <div id="dps-container" className="dps-container">
-        <ErrorMessage />
-        {!loading && <DpsForm pokemonData={pokemonData} shadowPokemonList={shadowPokemonList}/>}
+      <div id="dps-container" className="dps-container translate-up">
+        {!loading && <ErrorMessage />}
+        {!loading && <DpsForm pokemonData={pokemonData} shadowPokemonList={shadowPokemonList} />}
         {!loading && <PokemonCard />}
-        <button id="up-we-go" onClick={moveToTheTop}>&#8249;</button>
+        <div id="up-we-go-container">
+          <button id="up-we-go" onClick={moveToTheTop}>&#8249;</button>
+        </div>
       </div>
     </>
   )
