@@ -89,7 +89,7 @@ $pokemon-height: 150px;
     position: absolute;
     width: 620px;
     height: 415px;
-    z-index: -1;
+    z-index: 0;
     opacity: 0;
     transition: 0.5s ease;
     filter: blur(20px);
