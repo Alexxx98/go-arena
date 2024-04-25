@@ -43,6 +43,7 @@
   min-width: 960px;
   max-width: 960px;
   margin-top: 50px;
+  letter-spacing: 1px;
   animation: on-load 0.7s ease;
 }
 
@@ -133,6 +134,7 @@
 }
 .form-container .form {
   color: hsla(0, 0%, 89%, 0.911);
+  letter-spacing: 1px;
   text-align: center;
   border-radius: 15px;
   padding: 30px 0px;
@@ -146,6 +148,7 @@
   border-radius: 5px;
   text-align: center;
   font-size: 1.5rem;
+  letter-spacing: 2px;
   color: hsla(0, 0%, 89%, 0.911);
   width: 90%;
   border: 2px solid hsla(219, 92%, 41%, 0.884);
@@ -156,10 +159,11 @@
   outline: none;
 }
 .form-container .form input[type=submit] {
+  letter-spacing: 2px;
   font-size: 2rem;
   font-weight: bold;
   margin-top: 5px;
-  padding: 25px 45px;
+  padding: 25px 40px;
   color: hsla(0, 0%, 89%, 0.911);
   border: 2px solid hsla(219, 92%, 41%, 0.884);
   border-radius: 15px;
@@ -250,6 +254,7 @@
 .input-container label {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.25rem;
+  letter-spacing: 1px;
   position: absolute;
   left: 5%;
   padding: 10px;

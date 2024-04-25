@@ -153,22 +153,6 @@ function DpsForm(props) {
 
     }, [fastMoveSuggestions, chargedMoveSuggestions]);
 
-    // Switch background of switches
-    // useEffect(() => {
-    //     const switches = document.getElementById("switches");
-    //     const byLevelSwitch = switches.children[0];
-    //     const byCpSwitch = switches.children[1];
-
-    //     if (formByLevel) {
-    //         byLevelSwitch.className = "to-left-gradient";
-    //         byCpSwitch.className = "highlight-to-right";
-    //     } else {
-    //         byCpSwitch.className = "to-right-gradient";
-    //         byLevelSwitch.className = "highlight-to-left";
-    //     }
-
-    // }, [formByLevel])
-
     function showSuggestions(event) {
         const suggestions = event.target.nextSibling;
         const container = event.target.parentElement;

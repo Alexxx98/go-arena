@@ -58,6 +58,7 @@ $form-height: 880px;
     min-width: 960px;
     max-width: 960px;
     margin-top: 50px;
+    letter-spacing: 1px;
     animation: on-load $animation-duration ease;
 }
 
@@ -153,6 +154,7 @@ $form-height: 880px;
 
     .form {
         color: $text-color;
+        letter-spacing: 1px;
         text-align: center;
         border-radius: 15px;
         padding: 30px 0px;
@@ -166,6 +168,7 @@ $form-height: 880px;
             border-radius: 5px;
             text-align: center;
             font-size: 1.5rem;
+            letter-spacing: 2px;
             color: $text-color;
             width: 90%;
             border: 2px solid $decorative-color;
@@ -178,10 +181,11 @@ $form-height: 880px;
         }
 
         input[type='submit'] {
+            letter-spacing: 2px;
             font-size: 2rem;
             font-weight: bold;
             margin-top: 5px;
-            padding: 25px 45px;
+            padding: 25px 40px;
             color: $text-color;
             border: 2px solid $decorative-color;
             border-radius: 15px;
@@ -284,6 +288,7 @@ $form-height: 880px;
     label {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1.25rem;
+        letter-spacing: 1px;
         position: absolute;
         left: 5%;
         padding: 10px;
