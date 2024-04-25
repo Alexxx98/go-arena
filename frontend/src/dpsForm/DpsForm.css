@@ -18,6 +18,16 @@
     transform: rotate(360deg);
   }
 }
+@keyframes on-load {
+  from {
+    transform: translateY(-5%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
 .container {
   background: linear-gradient(to bottom, hsla(0, 0%, 7%, 0.863), black);
   width: 100%;
@@ -33,6 +43,7 @@
   min-width: 960px;
   max-width: 960px;
   margin-top: 50px;
+  animation: on-load 0.7s ease;
 }
 
 #shiny-snorlax {
@@ -118,6 +129,7 @@
   width: 100%;
   border-bottom: 5px solid;
   border-image: linear-gradient(to right, hsla(0, 0%, 7%, 0.863), hsla(219, 92%, 41%, 0.884), hsla(219, 92%, 41%, 0.884), hsla(0, 0%, 7%, 0.863)) 1;
+  animation: on-load 0.7s ease;
 }
 .form-container .form {
   color: hsla(0, 0%, 89%, 0.911);

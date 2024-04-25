@@ -3,6 +3,7 @@ $secondary-color: hsla(0, 1%, 37%, 0.856);
 $text-color: hsla(0, 0%, 89%, 0.911);
 $decorative-color: hsla(219, 92%, 41%, 0.884);
 $short-transition-time: 0.5s;
+$animation-duration: 0.7s;
 $form-height: 880px;
 
 @font-face {
@@ -30,6 +31,18 @@ $form-height: 880px;
     }
 }
 
+@keyframes on-load {
+    from {
+        transform: translateY(-5%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
 .container {
     background: linear-gradient(to bottom, $primary-color, black);
     width: 100%;
@@ -45,6 +58,7 @@ $form-height: 880px;
     min-width: 960px;
     max-width: 960px;
     margin-top: 50px;
+    animation: on-load $animation-duration ease;
 }
 
 #shiny-snorlax {
@@ -134,6 +148,7 @@ $form-height: 880px;
     width: 100%;
     border-bottom: 5px solid;
     border-image: linear-gradient(to right, $primary-color, $decorative-color, $decorative-color, $primary-color ) 1;
+    animation: on-load $animation-duration ease;
 
 
     .form {

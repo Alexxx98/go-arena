@@ -18,12 +18,23 @@
     height: 0px;
   }
 }
+@keyframes on-load {
+  from {
+    transform: translateY(-5%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
 #button-container {
   display: flex;
   justify-content: center;
   width: 100%;
   margin: auto;
   background-color: black;
+  animation: on-load 0.7s ease;
 }
 #button-container button {
   font-family: "PocketMonk", Helvetica, sans-serif;
@@ -53,6 +64,7 @@
   width: 100vw;
   overflow: hidden;
   background-color: black;
+  animation: on-load 0.7s ease;
 }
 
 .show-sprite {

@@ -112,22 +112,9 @@ function App() {
     });
   }
 
-  useEffect(() => {
-    const dpsContainer = document.getElementById("dps-container");
-    dpsContainer.classList.add("translate-up");
-    const timeout = setTimeout(() => {
-      dpsContainer.classList.remove("translate-up");
-    }, 10);
-
-    return () => {
-      clearTimeout(timeout);
-    }
-
-  }, [])
-
   return (
     <>
-      <div id="dps-container" className="dps-container translate-up">
+      <div id="dps-container" className="dps-container">
         {!loading && <ErrorMessage />}
         {!loading && <DpsForm pokemonData={pokemonData} shadowPokemonList={shadowPokemonList} />}
         {!loading && <PokemonCard />}

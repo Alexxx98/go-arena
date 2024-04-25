@@ -2,6 +2,7 @@ $primary-color: hsla(0, 0%, 7%, 0.863);
 $secondary-color: hsla(0, 1%, 37%, 0.856);
 $text-color: hsla(0, 0%, 89%, 0.911);
 $pokemon-height: 150px;
+$animation-time: 0.7s;
 
 @font-face {
     font-family: 'PocketMonk';
@@ -28,12 +29,25 @@ $pokemon-height: 150px;
     }
 }
 
+@keyframes on-load {
+    from {
+        transform: translateY(-5%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
 #button-container {
     display: flex;
     justify-content: center;
     width: 100%;
     margin: auto;
     background-color: black;
+    animation: on-load $animation-time ease;
 
     button {
         font-family: 'PocketMonk', Helvetica, sans-serif;
@@ -67,6 +81,7 @@ $pokemon-height: 150px;
     width: 100vw;
     overflow: hidden;
     background-color: black;
+    animation: on-load $animation-time ease;
 }
 
 .show-sprite {

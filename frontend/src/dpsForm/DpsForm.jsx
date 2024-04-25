@@ -111,6 +111,10 @@ function DpsForm(props) {
 
                 loadingScreen.style.display = 'none';
                 window.location.reload()
+                window.scrollTo({
+                    bottom: 0,
+                    behavior: 'smooth'
+                });
             })
 
             .catch(error => {
