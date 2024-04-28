@@ -34,17 +34,15 @@ $form-height: 880px;
 @keyframes on-load {
     from {
         transform: translateY(-5%);
-        opacity: 0;
     }
 
     to {
         transform: translateY(0%);
-        opacity: 1;
     }
 }
 
 .container {
-    background: linear-gradient(to bottom, $primary-color, black);
+    background: linear-gradient(to bottom, hsl(0, 0%, 23%), black);
     width: 100%;
     display: flex;
     justify-content: center;
@@ -102,11 +100,11 @@ $form-height: 880px;
     position: fixed;
     display: none;
     left: 0;
-    height: 120vh;
+    height: 140vh;
     width: 100vw;
     background-color: hsla(0, 0%, 0%, 0.952);
     z-index: 100;
-    transform: translateY(-10%);
+    transform: translateY(-20%);
 
     div {
         height: 100%;
@@ -128,7 +126,6 @@ $form-height: 880px;
     font-size: 5rem;
     text-shadow: 8px 8px hsla(219, 92%, 41%, 0.884);
     color: hsla(0, 2%, 84%, 0.801);
-    cursor: pointer;
     line-height: 1.5;
     margin: 0;
     margin-top: 50px;
@@ -191,7 +188,7 @@ $form-height: 880px;
             border-radius: 15px;
             cursor: pointer;
             background: none;
-            transition: $short-transition-time ease;
+            transition: 0.5s ease;
         }
 
         input[type='submit']:hover {

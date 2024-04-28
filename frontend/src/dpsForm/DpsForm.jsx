@@ -7,12 +7,13 @@ import weedle from './assets/weedle.png'
 import pikachu from './assets/pikachu3.png'
 import './DpsForm.css'
 
+
 function DpsForm(props) {
 
     const [pokemonData, setPokemonData] = useState(props.pokemonData)
     const shadowPokemonList = props.shadowPokemonList;
 
-    const apiUrl = "http://pokemongoarena.epicgamer.org/api/pokemon/"
+    const apiUrl = "http://127.0.0.1:8080/api/pokemon/";
 
     // variables for input values
     const [storageLoaded, setStorageLoaded] = useState(false);

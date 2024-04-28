@@ -1,15 +1,27 @@
 #app-container {
-    text-align: center;
+    display: relative;
+}
+
+@keyframes on-load {
+    from {
+        transform: translateY(-5%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
 }
 
 .dps-container {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin: 0;
     text-align: center;
-    transition: 1s ease;
+    left: 0%;
+    transition: all 0.6s ease;
 }
 
 .translate-up {
@@ -42,4 +54,46 @@
 
 #up-we-go:active {
     transform: rotate(90deg) scale(0.9);
+}
+
+#raid-teams-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: baseline;
+    top: 71px;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, hsl(0, 0%, 24%), black);
+    transition: all 0.6s ease;
+}
+
+#raid-teams-container h1 {
+    position: absolute;
+    align-items: center;
+    font-size: 5rem;
+    text-align: center;
+    color: hsla(0, 0%, 89%, 0.911);
+    line-height: 8rem;
+    top: 100px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-shadow: 8px 8px hsla(219, 92%, 41%, 0.884);
+    transition: 0.3s ease;
+    animation: on-load 0.7s ease;
+}
+
+#raid-teams-container h1:hover {
+    opacity: 0.8;
+}
+
+#darkrai {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    height: 330px;
 }

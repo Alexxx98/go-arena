@@ -1,0 +1,47 @@
+$decorative-color: hsla(219, 92%, 41%, 0.884);
+
+@keyframes on-load {
+    from {
+        transform: translateY(-5%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+#raid-eggs {
+    position: absolute;
+    top: 350px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    animation: on-load 0.7s ease;
+}
+
+.egg-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 50px;
+    width: 100%;
+    border-bottom: 2px solid $decorative-color;
+
+    img {
+        height: 75px;
+        transition: 0.5s ease-out;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+}
+
+.chosen {
+    border: 2px solid $decorative-color;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: none;
+    box-shadow: 5px -5px 5px 2px black;
+}

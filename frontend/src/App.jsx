@@ -3,6 +3,8 @@ import Navbar from './navbar/Navbar.jsx'
 import DpsForm from './dpsForm/DpsForm.jsx'
 import PokemonCard from './pokemonCard/PokemonCard.jsx'
 import ErrorMessage from './errorMessage/ErrorMessage.jsx'
+import RaidEggs from './raidEggs/RaidEggs.jsx'
+import darkrai from './assets/Darkrai.png'
 import './App.css'
 
 function App() {
@@ -11,8 +13,6 @@ function App() {
   const [currentPokemonMoves, setCurrentPokemonMoves] = useState("/api/v1/current_pokemon_moves.json");
   const [shadowPokemonEndpoint, setShadowPokemonEndpoint] = useState("/api/v1/shadow_pokemon.json");
   const [megaPokemonEndpoint, setMegaPokemonEndpoint] = useState("/api/v1/mega_pokemon.json");
-
-  // const pokemonData = [];
 
   const [validForms, setValidForms] = useState(['Normal', 'Alola', 'Galarian', 'Hisuian', 'Origin', 'Altered', 'Standard', 'Galarian_standard']);
 
@@ -113,7 +113,8 @@ function App() {
   }
 
   return (
-    <>
+    <div id="app-container">
+      <Navbar />
       <div id="dps-container" className="dps-container">
         {!loading && <ErrorMessage />}
         {!loading && <DpsForm pokemonData={pokemonData} shadowPokemonList={shadowPokemonList} />}
@@ -122,7 +123,12 @@ function App() {
           <button id="up-we-go" onClick={moveToTheTop}>&#8249;</button>
         </div>
       </div>
-    </>
+      <div id="raid-teams-container">
+        <img id="darkrai" src={darkrai} alt="Darkrai" />
+        <h1>Raid Teams</h1>
+        <RaidEggs />
+      </div>
+    </div>
   )
 }
 

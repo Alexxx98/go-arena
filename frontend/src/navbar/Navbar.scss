@@ -1,15 +1,36 @@
 $primary-color: hsla(0, 0%, 7%, 0.863);
 $secondary-color: hsla(0, 1%, 37%, 0.856);
+$decorative-color: hsla(219, 92%, 41%, 0.884);
 $text-color: hsla(0, 0%, 89%, 0.911);
+$transition-time: 0.5s;
+
+@font-face {
+    font-family: 'PokemonHollowFont';
+    src: url('../assets/PokemonHollowNormal-pyPZ.ttf')
+}
+
+@font-face {
+    font-family: 'PokemonUnknownFont';
+    src: url('assets/AnilloOutline-rg6Kx.ttf')
+}
 
 .navbar {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: $primary-color;
+    display: flex;
+    justify-content: center;
+    background-color: hsla(0, 0%, 7%, 0.966);
+    width: 100vw;
+    border-bottom: 2px solid;
+    border-image: linear-gradient(to left, black, $decorative-color, $decorative-color, black) 1;
+    box-shadow: 0px 5px 5px black;
+}
+
+.navbar-content {
     display: flex;
     justify-content: space-between;
-    width: 100vw;
-    box-shadow: 5px 5px 5px black;
+    align-items: center;
+    width: 70vw;
     color: $text-color;
+    letter-spacing: 3px;
     overflow: hidden;
 
     ul {
@@ -20,26 +41,27 @@ $text-color: hsla(0, 0%, 89%, 0.911);
     }
 
     h1 {
-        font-size: 2.5rem;
+        font-family: 'PokemonUnknownFont', Helvetica, sans-serif;
+        font-size: 1.5rem;
         display: flex;
+        margin: 0;
+        padding: 10px;
         justify-content: center;
         align-items: center;
     }
 
     li {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        font-family: 'PokemonHollowFont', Helvetica, sans-serif;
         font-size: 1.5rem;
         font-weight: bold;
-        padding: 20px;
+        padding: 0px 35px;
         text-align: center;
-        transition: 0.2s ease;
+        transition: $transition-time ease;
         cursor: pointer;
     }
 
     li:hover {
-        background-color: $secondary-color;
+        background-color: $decorative-color;
         transform: scale(1.1);
     }
 
@@ -48,4 +70,14 @@ $text-color: hsla(0, 0%, 89%, 0.911);
         height: 64px;
     }
 }
-  
+
+@media (max-width: 1250px) {
+    .navbar-content {
+        width: 100vw;
+    }
+}
+
+.hide-view {
+    position: absolute;
+    left: -100%;
+}

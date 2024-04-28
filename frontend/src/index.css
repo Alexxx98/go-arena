@@ -9,4 +9,19 @@ body {
   padding: 0;
   display: flex;
   justify-content: center;
+  background-color: black;
+}
+
+body h1 {
+  user-select: none;
+  cursor: default;
+}
+
+body p {
+  user-select: none;
+  cursor: default;
+}
+
+body span {
+  user-select: none;
 }
