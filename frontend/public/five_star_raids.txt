@@ -15,30 +15,33 @@ Latios
 Kyogre
 Groudon
 Rayquaza
-Deoxys
+Deoxys Normal
+Deoxys Attack
+Deoxys Defense
+Deoxys Speed
 Uxie
 Mesprit
 Azelf
-Origin Dialga
 Dialga
+Origin Dialga
 Palkia
 Origin Palkia
 Heatran
 Regigigas
-Giratina
-Giratina
+Origin Giratina
+Altered Giratina
 Cresselia
 Darkrai
 Cobalion
 Terrakion
 Virizion
-Tornadus
+Incarnate Tornadus
 Therian Tornadus
-Thundurus
+Incarnate Thundurus
 Therian Thundurus
 Reshiram
 Zekrom
-Landorus
+Incarnate Landorus
 Therian Landorus
 Kyurem
 Genesect

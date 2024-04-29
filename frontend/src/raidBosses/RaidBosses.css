@@ -59,14 +59,22 @@
 }
 
 .raid-boss {
+  text-align: center;
+  padding: 0px 20px;
+  margin: 10px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+.raid-boss p {
   font-family: "PocketMonk", Arial, sans-serif;
   color: hsla(0, 0%, 89%, 0.911);
+  margin: 0;
   font-size: 2rem;
-  text-align: center;
-  padding: 20px;
   text-shadow: 5px 5px black;
   cursor: pointer;
-  transition: 0.3s ease;
+}
+.raid-boss img {
+  height: 120px;
 }
 .raid-boss:hover {
   opacity: 0.8;

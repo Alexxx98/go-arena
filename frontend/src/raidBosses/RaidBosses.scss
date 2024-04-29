@@ -70,14 +70,24 @@ $decorative-color: hsla(219, 92%, 41%, 0.884);
 }
 
 .raid-boss {
-    font-family: 'PocketMonk', Arial, sans-serif;
-    color: $text-color;
-    font-size: 2rem;
     text-align: center;
-    padding: 20px;
-    text-shadow: 5px 5px black;
-    cursor: pointer;
+    padding: 0px 20px;
+    margin: 10px;
     transition: 0.3s ease;
+    cursor: pointer;
+
+    p {
+        font-family: 'PocketMonk', Arial, sans-serif;
+        color: $text-color;
+        margin: 0;
+        font-size: 2rem;
+        text-shadow: 5px 5px black;
+        cursor: pointer;
+    }
+
+    img {
+        height: 120px;
+    }
 
     &:hover {
         opacity: 0.8;

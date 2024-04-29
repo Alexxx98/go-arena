@@ -4,22 +4,37 @@ import './RaidBosses.css'
 function RaidBosses(props) {
 
     const [searchValue, setSearchValue] = useState("");
-    const [pokemonList, setPokemonList] = useState(props.pokemonList);
-    const [raidBosses, setRaidBosses] = useState(props.pokemonList);
+
+    const [pokemonList, setPokemonList] = useState([]);
+    const [raidBosses, setRaidBosses] = useState([]);
 
     useEffect(() => {
-        setPokemonList(props.pokemonList);
-        setRaidBosses(props.pokemonList);
-    }, [props.pokemonList])
+        props.pokemonList.map((pokemon, index) => (
+            setPokemonList(prev => ([...prev, { name: pokemon.replace('\r', ''), sprite: props.pokemonSprites[index] }]))
+        ))
+
+        return () => {
+            setPokemonList([])
+        }
+
+    }, [props.pokemonList, props.spritesList])
+
+    useEffect(() => {
+        setRaidBosses(pokemonList);
+
+        return () => {
+            setRaidBosses([]);
+        }
+
+    }, [pokemonList])
 
     function handleSearchValueChange(event) {
         const newSearchValue = event.target.value
-        console.log(newSearchValue);
 
         const newPokemonList = pokemonList.filter(pokemon => (
             newSearchValue.length > 0
                 ?
-                pokemon.toLowerCase().includes(newSearchValue.toLowerCase())
+                pokemon.name.toLowerCase().includes(newSearchValue.toLowerCase())
                 : pokemonList
         ))
 
@@ -27,9 +42,12 @@ function RaidBosses(props) {
         setRaidBosses(newPokemonList);
     }
 
+    console.log(raidBosses);
+
     const raidBossesDisplayed = raidBosses.map((boss, index) => (
         <div key={index} className="raid-boss">
-            {boss}
+            <img src={boss.sprite} alt={boss.name} />
+            <p>{boss.name}</p>
         </div>
     ))
 
