@@ -14,9 +14,10 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 5433:5433
     env_file:
       - postgres.env
+    command: ["postgres", "-p", "5433"]
     networks:
       - db-net
 
@@ -42,7 +43,7 @@ services:
   gateway:
     build: ./nginx
     ports:
-      - 80:80
+      - 81:81
     depends_on:
       - backend
       - frontend
